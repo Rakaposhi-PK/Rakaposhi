@@ -17,38 +17,76 @@ namespace Rakaposhi.API.Core.Controllers
             _userService = userService;
         }
 
-        // GET: UserController/Create
         [HttpPost]
         public ActionResult Create([FromBody] User u)
         {
-            return View();
+            try
+            {
+                _userService.Add(u);
+                return Created("Get", u);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
-
-        // GET: UserController/Edit/5
         [HttpPut]
         public ActionResult Edit([FromBody] User u)
         {
-            return View();
+           try
+           {
+               _userService.Add(u);
+               return NoContent();
+           }
+           catch(Exception ex)
+           {
+                return BadRequest(ex.Message);
+           }
         }
 
-        // GET: UserController/Delete/5
         [HttpDelete("{Id}")]
         public ActionResult Delete(long Id)
         {
-            return View();
+            try
+            {
+                _userService.Delete(Id);
+                return NoContent();
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpGet("{Id}")]
-        public ActionResult Find(int Id)
+        public ActionResult<User> Find(int Id)
         {
-            return View();
+            try
+            {
+                var found = _userService.Find(Id);
+
+                return Ok(found);
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+           
         }
 
         [HttpGet]
-        public ActionResult<User> GetAll()
+        public ActionResult GetAll()
         {
-            return View();
+           try
+           {
+                var users = _userService.GetAll();
+                return Ok(users);
+           }
+           catch(Exception ex)
+           {
+                return BadRequest(ex.Message);
+           }
         }
 
     }
