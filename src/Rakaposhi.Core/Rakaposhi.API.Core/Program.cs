@@ -32,10 +32,10 @@ builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddSwaggerGen(c =>
 {
-    //c.SwaggerDoc("Version 1.0.0.0", new Microsoft.OpenApi.Models.OpenApiInfo
+    //c.SwaggerDoc(Rakaposhi.API.Core.Global.APIVERSION, new Microsoft.OpenApi.Models.OpenApiInfo
     //{
-    //    Title = "Parbat.Core.API",
-    //    Version = "Version 1.0.0.0",
+    //    Title = "Rakaposhi.Core.API",
+    //    Version = Rakaposhi.API.Core.Global.APIVERSION,
     //    Description = "An open source Retail System",
     //    //TermsOfService = new Uri("maazk9119.github.io"),
     //    Contact = new Microsoft.OpenApi.Models.OpenApiContact
@@ -96,6 +96,8 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseDeveloperExceptionPage();
 
 app.Run();
 
