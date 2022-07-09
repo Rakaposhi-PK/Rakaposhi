@@ -3,7 +3,7 @@ using Rakaposhi.Business.Core.DataObjects;
 
 namespace Rakaposhi.Business.Core.Services
 {
-    internal class UserService : IService
+    public class UserService : IService
     {
         IRepositoryFactory _factory;
 

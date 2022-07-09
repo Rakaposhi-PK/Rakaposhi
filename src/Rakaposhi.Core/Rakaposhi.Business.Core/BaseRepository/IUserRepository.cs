@@ -2,7 +2,7 @@
 
 namespace Rakaposhi.Business.Core.BaseRepository
 {
-    internal interface IUserRepository : IGenericRepository<User>
+    public interface IUserRepository : IGenericRepository<User>
     {
 
     }

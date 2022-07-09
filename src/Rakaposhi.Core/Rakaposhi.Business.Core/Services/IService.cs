@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Rakaposhi.Business.Core.Services
 {
     //injecting Automatically to framework
-    internal interface IService
+    public interface IService
     {
     }
 }

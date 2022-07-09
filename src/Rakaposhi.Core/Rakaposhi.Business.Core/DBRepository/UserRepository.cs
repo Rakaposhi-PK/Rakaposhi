@@ -3,7 +3,7 @@ using Rakaposhi.Business.Core.DataObjects;
 
 namespace Rakaposhi.Business.Core.DBRepository
 {
-    internal class UserRepository : IUserRepository
+    public class UserRepository : IUserRepository
     {
         public void Add(User entity)
         {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Rakaposhi.Business.Core.BaseRepository
 {
-    internal interface IRepositoryFactory
+    public interface IRepositoryFactory
     {
         public IUserRepository UserRepository { get; }
     }

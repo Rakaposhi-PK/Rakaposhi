@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Rakaposhi.Business.Core.BaseRepository
 {
-    internal interface IGenericRepository<T> where T : class
+    public interface IGenericRepository<T> where T : class
     {
         void Add(T entity);
 
