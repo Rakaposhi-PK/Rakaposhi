@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="DataObjects\" />
+    <Folder Include="BaseRepository\" />
+    <Folder Include="BaseRepository\" />
+    <Folder Include="DataObjects\" />
+    <Folder Include="DBRepository\" />
+    <Folder Include="Services\" />
+    <Folder Include="Services\" />
+  </ItemGroup>
+
+</Project>
