@@ -7,7 +7,7 @@ namespace Rakaposhi.API.Core.Controllers
 {
     [Authorize]
     [ApiController]
-    [Route("[controller]")]
+    [Route(Global.APICONTROLLER)]
     public class UserController : Controller
     {
         private UserService _userService;
@@ -18,29 +18,34 @@ namespace Rakaposhi.API.Core.Controllers
         }
 
         // GET: UserController/Create
-        public ActionResult Create()
+        [HttpPost]
+        public ActionResult Create([FromBody] User u)
         {
             return View();
         }
 
 
         // GET: UserController/Edit/5
-        public ActionResult Edit(int id)
+        [HttpPut]
+        public ActionResult Edit([FromBody] User u)
         {
             return View();
         }
 
         // GET: UserController/Delete/5
-        public ActionResult Delete(int id)
+        [HttpDelete("{Id}")]
+        public ActionResult Delete(long Id)
         {
             return View();
         }
 
+        [HttpGet("{Id}")]
         public ActionResult Find(int Id)
         {
             return View();
         }
 
+        [HttpGet]
         public ActionResult<User> GetAll()
         {
             return View();
