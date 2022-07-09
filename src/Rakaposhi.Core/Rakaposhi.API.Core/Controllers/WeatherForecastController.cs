@@ -6,7 +6,7 @@ namespace Rakaposhi.API.Core.Controllers
 {
     [Authorize]
     [ApiController]
-    [Route("[controller]")]
+    [Route(Global.APICONTROLLER)]
     public class WeatherForecastController : ControllerBase
     {
         private readonly IJWTManagerRepository _jWTManager;
