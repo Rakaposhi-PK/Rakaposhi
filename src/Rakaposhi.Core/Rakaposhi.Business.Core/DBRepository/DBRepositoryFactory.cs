@@ -2,7 +2,7 @@
 
 namespace Rakaposhi.Business.Core.DBRepository
 {
-    internal class DBRepositoryFactory : IRepositoryFactory
+    public class DBRepositoryFactory : IRepositoryFactory
     {
         private IUserRepository? _userRepository;
 
