@@ -79,6 +79,23 @@ builder.Services.AddSwaggerGen(c =>
 
 });
 
+//Inject Instance -Repository Factory
+builder.Services.AddTransient<Rakaposhi.Business.Core.BaseRepository.IRepositoryFactory, Rakaposhi.Business.Core.DBRepository.DBRepositoryFactory>();
+
+//Inject services: get all classes implementing IService
+System.Reflection.Assembly assembly = typeof(Rakaposhi.Business.Core.Services.IService).Assembly;
+
+IEnumerable<Type> iservice = assembly.GetTypes().
+    Where(x => !x.IsAbstract &&
+          x.IsClass          && 
+          x.GetInterfaces().
+          Contains(typeof(Rakaposhi.Business.Core.Services.IService)));
+
+foreach(Type s in iservice)
+{
+    builder.Services.Add(new ServiceDescriptor(s, s, ServiceLifetime.Transient));
+}
+
 
 var app = builder.Build();
 
