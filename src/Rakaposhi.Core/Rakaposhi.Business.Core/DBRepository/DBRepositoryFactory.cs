@@ -4,8 +4,8 @@ namespace Rakaposhi.Business.Core.DBRepository
 {
     public class DBRepositoryFactory : IRepositoryFactory
     {
-        private IUserRepository? _userRepository;
-
+        private IUserRepository _userRepository;
+        private IUserRoleRepository _userRoleRepository;
 
         public IUserRepository UserRepository
         {
@@ -17,6 +17,19 @@ namespace Rakaposhi.Business.Core.DBRepository
                 }
 
                 return _userRepository;
+            }
+        }
+
+        public IUserRoleRepository UserRoleRepository
+        {
+            get
+            {
+                if(_userRoleRepository is null)
+                {
+                    _userRoleRepository = new UserRoleRepository();
+                }
+
+                return _userRoleRepository;
             }
         }
     }
