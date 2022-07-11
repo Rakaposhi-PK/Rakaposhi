@@ -39,7 +39,11 @@ namespace Rakaposhi.Business.Core.DBRepository
 
         public void Update(UserRole entity)
         {
-            throw new NotImplementedException();
+            DbCommand cmd = _db.CreateStoreProcedure(storeProcedureName: StoreProcds.UPDATE);
+            _db.AddParameter(cmd, paramName: Params.USERROLEID, entity.UserRoleID);
+            _db.AddParameter(cmd, paramName: Params.USERROLE, entity.Role);
+            _db.AddParameter(cmd, paramName: Params.USERDESCRIPTION, entity.UserDescription);
+            _db.Execute(cmd);
         }
 
 
