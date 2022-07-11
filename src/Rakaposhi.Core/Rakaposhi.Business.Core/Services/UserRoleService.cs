@@ -42,7 +42,7 @@ namespace Rakaposhi.Business.Core.Services
         }
 
         public UserRole Find(long Id)
-        {
+        {   
             return _factory.UserRoleRepository.Find(Id);
         }
 
