@@ -8,7 +8,7 @@ namespace Rakaposhi.Business.Core.DataObjects
         public long UserRoleID { get; set; }
 
         [Required]
-        public string Role { get; set; }
+        public string UserRoleName { get; set; }
 
         public string UserDescription { get; set; }
     }
