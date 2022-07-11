@@ -10,7 +10,6 @@ namespace Rakaposhi.Data
 
         private string? _connectionString;
         private static IDatabase? _instance;
-        private static Database? _connectionInstance;
 
         #endregion
 
@@ -35,12 +34,12 @@ namespace Rakaposhi.Data
         {
             get
             {
-                if(_connectionInstance is null)
+                if(_instance is null)
                 {
-                    _connectionInstance = new Database();
+                    _instance = new Database();
                 }
 
-                return _connectionInstance;
+                return (Database)_instance;
             }
         }
 
@@ -70,7 +69,7 @@ namespace Rakaposhi.Data
                 builder.Password = dbPassword;
             }
 
-            _connectionString = builder.ConnectionString;
+            this._connectionString = builder.ConnectionString;
         }
 
         public DbCommand CreateStoreProcedure(string storeProcedureName)
@@ -93,7 +92,9 @@ namespace Rakaposhi.Data
         {
             object? result = null;
 
-            return this.ExecuteScalar(cmd, result);
+            this.ExecuteScalar(cmd, out result);
+
+            return result is null ? string.Empty : result;
         }
 
         #endregion
@@ -141,7 +142,7 @@ namespace Rakaposhi.Data
             }
         }
 
-        private object? ExecuteScalar(DbCommand cmd, object? result)
+        private void ExecuteScalar(DbCommand cmd, out object? result)
         {
             using (var con = this.CreateConnection())
             {
@@ -150,8 +151,6 @@ namespace Rakaposhi.Data
                 result = cmd.ExecuteScalar();
                 con.Close();
             }
-
-            return result;
         }
         
         #endregion

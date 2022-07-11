@@ -21,6 +21,5 @@ namespace Rakaposhi.Business.Core.DataObjects
 
         [Required]
         public long ImageID { get; set; }
-
     }
 }
