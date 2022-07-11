@@ -9,5 +9,7 @@ namespace Rakaposhi.Business.Core.BaseRepository
     public interface IRepositoryFactory
     {
         public IUserRepository UserRepository { get; }
+
+        public IUserRoleRepository UserRoleRepository { get; }
     }
 }
