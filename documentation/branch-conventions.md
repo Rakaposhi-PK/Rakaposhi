@@ -30,23 +30,23 @@ Before merging feature to staging QA needs to test this branch properly.
 **Note**
 **Developer has to checkout working branch always from feature.**
 
-Naming convention: <constant>-<feature-name>
-constant = feature-
-name	 = User 
+Naming convention: <constant>-<feature-name> </br>
+constant = feature- <br/>
+name	    = User <br/> 
 
-####Example:#### feature-user 
+#### Example: #### feature-user 
 
 ## Working Branches 
 Developers will be working in these branches, developer has to do development and testing before merging to feature.
 
-Naming convention: <constant>-<name intials>-<assign task>
+Naming convention: <constant>-<name intials>-<assign task> <br/>
 
-constant		= dev-
-name initials	= mzk
-assign taks		= continuous integration
+constant		= dev- <br/>
+name initials	= mzk <br/>
+ assign taks		= continuous integration </br>
 
 #### Example:
-dev-mazk-continuous-integration
+dev-mazk-continuous-integration <br/><br/>
 
 The following are user intials conventions.
 
