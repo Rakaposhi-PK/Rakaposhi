@@ -34,7 +34,7 @@ Naming convention: constant-featurename. <br/>
 constant = feature- <br/>
 name	 = User  <br/>
 
-### Example: feature-user 
+#### Example: #### feature-user 
 
 ## Working Branches 
 Developers will be working in these branches, developer has to do development and testing before merging to feature.
