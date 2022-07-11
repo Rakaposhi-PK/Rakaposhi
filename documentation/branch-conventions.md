@@ -34,22 +34,24 @@ Naming convention: <constant>-<feature-name>
 constant = feature-
 name	 = User 
 
-### Example: feature-user 
+####Example:#### feature-user 
 
 ## Working Branches 
 Developers will be working in these branches, developer has to do development and testing before merging to feature.
 
 Naming convention: <constant>-<name intials>-<assign task>
 
-constant		= Dev-
+constant		= dev-
 name initials	= mzk
 assign taks		= continuous integration
 
-### Example: Dev-mazk-continuous-integration
+#### Example:
+dev-mazk-continuous-integration
 
 The following are user intials conventions.
 
-### Example: Maaz Khan, taking first and last letter from first name and the first letter from last name.
+#### Example: 
+Maaz Khan, taking first and last letter from first name and the first letter from last name.
 
 ## Active Users 
 |	     USER		 | INITIALS |
