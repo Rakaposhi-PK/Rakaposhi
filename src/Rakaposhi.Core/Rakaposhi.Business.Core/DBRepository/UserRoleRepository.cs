@@ -2,6 +2,7 @@
 using Rakaposhi.Business.Core.DataObjects;
 using Rakaposhi.Data;
 using System.Data.Common;
+using System.Text.Json;
 
 namespace Rakaposhi.Business.Core.DBRepository
 {
@@ -17,7 +18,7 @@ namespace Rakaposhi.Business.Core.DBRepository
         public void Add(UserRole entity)
         {
             DbCommand cmd = _db.CreateStoreProcedure(storeProcedureName: StoreProcds.INSERT);
-            _db.AddParameter(cmd, paramName: Params.USERROLE, entity.Role);
+            _db.AddParameter(cmd, paramName: Params.USERROLENAME, entity.UserRoleName);
             _db.AddParameter(cmd, paramName: Params.USERDESCRIPTION, entity.UserDescription);
             entity.UserRoleID = Convert.ToInt64(_db.ExecuteScalar(cmd));
         }
@@ -29,7 +30,12 @@ namespace Rakaposhi.Business.Core.DBRepository
 
         public UserRole Find(long Id)
         {
-            throw new NotImplementedException();
+            DbCommand cmd = _db.CreateStoreProcedure(storeProcedureName: StoreProcds.FIND);
+            _db.AddParameter(cmd, paramName: Params.USERROLEID, Id);
+            string found = Convert.ToString(_db.ExecuteScalar(cmd));
+            UserRole result = JsonSerializer.Deserialize<UserRole>(found);
+
+            return result;
         }
 
         public IEnumerable<UserRole> GetAll()
@@ -41,7 +47,7 @@ namespace Rakaposhi.Business.Core.DBRepository
         {
             DbCommand cmd = _db.CreateStoreProcedure(storeProcedureName: StoreProcds.UPDATE);
             _db.AddParameter(cmd, paramName: Params.USERROLEID, entity.UserRoleID);
-            _db.AddParameter(cmd, paramName: Params.USERROLE, entity.Role);
+            _db.AddParameter(cmd, paramName: Params.USERROLENAME, entity.UserRoleName);
             _db.AddParameter(cmd, paramName: Params.USERDESCRIPTION, entity.UserDescription);
             _db.Execute(cmd);
         }
@@ -59,7 +65,7 @@ namespace Rakaposhi.Business.Core.DBRepository
         private struct Params
         {
             public const string USERROLEID = "UserRoleID";
-            public const string USERROLE = "UserRole";
+            public const string USERROLENAME = "UserRoleName";
             public const string USERDESCRIPTION = "UserDescription";
         }
     }

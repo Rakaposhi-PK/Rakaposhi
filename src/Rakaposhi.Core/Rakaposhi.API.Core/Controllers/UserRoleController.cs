@@ -54,9 +54,18 @@ namespace Rakaposhi.API.Core.Controllers
 
         // GET api/<UserRoleController>/5
         [HttpGet("{id}")]
-        public string Find(long id)
+        public ActionResult<UserRole> Find(long id)
         {
-            return "value";
+            try
+            {
+                var found = _userRoleService.Find(id);
+
+                return Ok(found);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         // GET: api/<UserRoleController>
