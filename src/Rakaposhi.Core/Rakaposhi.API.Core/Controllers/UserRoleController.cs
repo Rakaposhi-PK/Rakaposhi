@@ -18,7 +18,7 @@ namespace Rakaposhi.API.Core.Controllers
 
         // POST api/<UserRoleController>
         [HttpPost]
-        public ActionResult Add([FromBody] UserRole userRole)
+        public ActionResult Create([FromBody] UserRole userRole)
         {
             try
             {
@@ -32,9 +32,18 @@ namespace Rakaposhi.API.Core.Controllers
         }
 
         // PUT api/<UserRoleController>/5
-        [HttpPut("{id}")]
-        public void Update(int id, [FromBody] string value)
+        [HttpPut]
+        public ActionResult Update([FromBody] UserRole userRole)
         {
+            try
+            {
+                _userRoleService.Update(userRole);
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         // DELETE api/<UserRoleController>/5
