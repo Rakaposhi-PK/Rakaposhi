@@ -7,15 +7,16 @@ namespace Rakaposhi.Data
     public class Database : IDatabase
     {
         #region Private Properties
-        
-        private string? _connectionString { get; set; }
-        private IDatabase _instance { get; set; }
+
+        private string? _connectionString;
+        private static IDatabase? _instance;
+        private static Database? _connectionInstance;
 
         #endregion
 
         #region Public Properties
 
-        public IDatabase Instance
+        public static IDatabase Instance
         {
             get
             {
@@ -30,6 +31,19 @@ namespace Rakaposhi.Data
             }
         }
 
+        public static Database FullInstance
+        {
+            get
+            {
+                if(_connectionInstance is null)
+                {
+                    _connectionInstance = new Database();
+                }
+
+                return _connectionInstance;
+            }
+        }
+
         #endregion
 
         #region Constructor
@@ -40,12 +54,23 @@ namespace Rakaposhi.Data
         #endregion
 
         #region Public Methods
-        public void SetConnectionString(string connectionString)
+        public void SetConnectionString(string dbServer, string dbName, string dbUser, string dbPassword, bool trusted)
         {
-            if (_connectionString is null)
+            SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
+
+
+            builder.DataSource = dbServer;
+            builder.InitialCatalog = dbName;
+            builder.IntegratedSecurity = trusted;
+
+            if (!trusted)
             {
-                _connectionString = connectionString;
+                builder.IntegratedSecurity = false;
+                builder.UserID = dbUser;
+                builder.Password = dbPassword;
             }
+
+            _connectionString = builder.ConnectionString;
         }
 
         public DbCommand CreateStoreProcedure(string storeProcedureName)

@@ -96,6 +96,22 @@ foreach(Type s in iservice)
     builder.Services.Add(new ServiceDescriptor(s, s, ServiceLifetime.Transient));
 }
 
+//Set Connection string
+var dbServer = builder.Configuration["environmentVariables:DB_SERVER"];
+var dbName = builder.Configuration["environmentVariables:DB_NAME"];
+var dbUser = builder.Configuration["environmentVariables:DB_USER"];
+var dbPassword = builder.Configuration["environmentVariables:DB_PASSWORD"];
+var trustedStr = builder.Configuration["environmentVariables:TRUSTED"];
+
+if (!(String.IsNullOrEmpty(dbServer)   && String.IsNullOrEmpty(dbName) && String.IsNullOrEmpty(dbUser)
+   && String.IsNullOrEmpty(dbPassword) && String.IsNullOrEmpty(trustedStr))) //handling null reference
+{
+    #pragma warning disable CS8604 // Dereference of a possibly null reference.
+    bool trusted = bool.Parse(trustedStr);
+
+    Rakaposhi.Data.Database.FullInstance.
+        SetConnectionString(dbServer, dbName, dbUser, dbPassword, trusted);
+}
 
 var app = builder.Build();
 
