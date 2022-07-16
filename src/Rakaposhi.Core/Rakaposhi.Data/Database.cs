@@ -8,12 +8,13 @@ namespace Rakaposhi.Data
     {
         #region Private Properties
 
-        private string? _connectionString;
         private static IDatabase? _instance;
 
         #endregion
 
         #region Public Properties
+
+        public string? ConnectionString { get; set; }
 
         public static IDatabase Instance
         {
@@ -27,19 +28,6 @@ namespace Rakaposhi.Data
                 }
 
                 return _instance;
-            }
-        }
-
-        public static Database FullInstance
-        {
-            get
-            {
-                if(_instance is null)
-                {
-                    _instance = new Database();
-                }
-
-                return (Database)_instance;
             }
         }
 
@@ -69,7 +57,7 @@ namespace Rakaposhi.Data
                 builder.Password = dbPassword;
             }
 
-            this._connectionString = builder.ConnectionString;
+            this.ConnectionString = builder.ConnectionString;
         }
 
         public DbCommand CreateStoreProcedure(string storeProcedureName)
@@ -104,7 +92,7 @@ namespace Rakaposhi.Data
         private DbConnection CreateConnection()
         {
             var dbConnection = new SqlConnection();
-            dbConnection.ConnectionString = _connectionString;
+            dbConnection.ConnectionString = this.ConnectionString;
 
             return dbConnection;
         }

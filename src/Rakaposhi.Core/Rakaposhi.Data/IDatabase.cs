@@ -2,7 +2,7 @@
 
 namespace Rakaposhi.Data
 {
-    public interface IDatabase
+    public interface IDatabase : IConnection
     {
         void Execute(DbCommand cmd);
         void AddParameter(DbCommand cmd, string paramName, object paramvalue);
