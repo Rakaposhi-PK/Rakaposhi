@@ -109,7 +109,7 @@ if (!(String.IsNullOrEmpty(dbServer)   && String.IsNullOrEmpty(dbName) && String
     #pragma warning disable CS8604 // Dereference of a possibly null reference.
     bool trusted = bool.Parse(trustedStr);
 
-    Rakaposhi.Data.Database.FullInstance.
+    Rakaposhi.Data.Database.Instance.
         SetConnectionString(dbServer, dbName, dbUser, dbPassword, trusted);
 }
 
