@@ -19,7 +19,7 @@ namespace Rakaposhi.Business.Core.Services
 
         public void Update(UserRole userRole)
         {
-            var found = _factory.UserRoleRepository.Find(userRole.UserRoleID);
+            var found = _factory.UserRoleRepository.Find(userRole.UserRoleID.Value);
 
             if (found == null)
             {
