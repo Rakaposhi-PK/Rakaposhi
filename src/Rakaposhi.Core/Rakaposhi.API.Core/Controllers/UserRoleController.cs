@@ -83,9 +83,17 @@ namespace Rakaposhi.API.Core.Controllers
 
         // GET: api/<UserRoleController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public ActionResult GetAll ()
         {
-            return new string[] { "value1", "value2" };
+            try
+            {
+                var found = _userRoleService.GetAll();
+                return Ok(found);
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex);
+            }
         }
     }
 }
