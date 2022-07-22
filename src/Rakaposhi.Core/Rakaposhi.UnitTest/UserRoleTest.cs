@@ -29,7 +29,7 @@ namespace Rakaposhi.UnitTest
         [DataRow(4, "Arish", "Consultant")]
         [TestMethod]
         //[DynamicData(nameof(AddUsers))]
-        public void UserRoleCreate(long userId, string userName, string description)
+        public void UserRoleCreate_Valid(long userId, string userName, string description)
         {
             //Arrange
             var userRole = new UserRole()
@@ -46,12 +46,34 @@ namespace Rakaposhi.UnitTest
             //Assert
             Assert.IsTrue(condition: HttpStatusCode.Created == (HttpStatusCode)response.StatusCode);
             Assert.AreEqual(expected: userRole.UserRoleID, actual: newUser.UserRoleID);
-            Assert.AreEqual(userRole.UserRoleName, newUser.UserRoleName);
-            Assert.AreEqual(userRole.UserDescription, newUser.UserDescription);
+            Assert.AreEqual(expected: userRole.UserRoleName, actual: newUser.UserRoleName);
+            Assert.AreEqual(expected: userRole.UserDescription, actual: newUser.UserDescription);
         }
 
+
         [TestMethod]
-        public void UserRoleUpdate()
+        public void UserRoleCreate_InValid()
+        {
+            //Arrange
+            var userRole = new UserRole()
+            {
+                UserRoleID = null,
+                UserRoleName = "Maaz",
+                UserDescription = "Consultant"
+            };
+
+            //Act
+            var response = _controller.Create(userRole) as BadRequestObjectResult;
+
+            //Assert
+            Assert.IsTrue(condition: HttpStatusCode.BadRequest == (HttpStatusCode)response.StatusCode);
+            Assert.IsTrue(condition: ErrorCode.ADDERROR == response.Value.ToString());
+            Assert.AreEqual(expected: userRole.UserRoleID, actual: null);
+        }
+
+        
+        [TestMethod]
+        public void UserRoleUpdate_Valid()
         {
             //Arrange
             var userRole = new UserRole()
@@ -62,7 +84,7 @@ namespace Rakaposhi.UnitTest
             };
 
             //Act
-            _controller.Create(userRole);
+            UserRoleCreate_Valid(userRole.UserRoleID.Value, userRole.UserRoleName, userRole.UserDescription);
 
             var updateduserRole = new UserRole()
             {
@@ -74,26 +96,132 @@ namespace Rakaposhi.UnitTest
             var response = _controller.Update(updateduserRole) as NoContentResult;
 
             //Assert
-            Assert.IsTrue(condition: HttpStatusCode.NoContent == (HttpStatusCode)response.StatusCode);        
+            Assert.IsTrue(condition: HttpStatusCode.NoContent == (HttpStatusCode)response.StatusCode);
+            //Assert.IsTrue(condition: userRole.UserRoleName == updateduserRole.UserRoleName);
         }
 
+
         [TestMethod]
-        public void UserRoleGetAll()
+        public void UserRoleUpdate_InValid()
         {
             //Arrange
             var userRole = new UserRole()
             {
-                UserRoleID = 11,
+                UserRoleID = 10,
                 UserRoleName = "Admin",
                 UserDescription = "He/She has all priviileges",
             };
 
             //Act
-            //var response = controller.GetAll() as ViewResult;
+            UserRoleCreate_Valid(userRole.UserRoleID.Value, userRole.UserRoleName, userRole.UserDescription);
+
+            var updateduserRole = new UserRole()
+            {
+                UserRoleID = 11,
+                UserRoleName = "Not Admin",
+                UserDescription = "He/She has all priviileges",
+            };
+
+            var response = _controller.Update(updateduserRole) as BadRequestObjectResult;
+
+            //Assert
+            Assert.IsTrue(condition: HttpStatusCode.BadRequest == (HttpStatusCode)response.StatusCode);
+            Assert.IsTrue(condition: ErrorCode.UPDATEERROR == response.Value.ToString());
+            //Assert.IsFalse(condition: userRole.UserRoleName == updateduserRole.UserRoleName);
+        }
+
+
+        [TestMethod]
+        public void UserRoleDelete_Valid()
+        {
+            //Arrange
+            var userRole = new UserRole()
+            {
+                UserRoleID = 10,
+                UserRoleName = "Admin",
+                UserDescription = "He/She has all priviileges",
+            };
+
+            //Act
+            UserRoleCreate_Valid(userRole.UserRoleID.Value, userRole.UserRoleName, userRole.UserDescription);
+            var response = _controller.Delete(userRole.UserRoleID.Value) as NoContentResult;
 
 
             //Assert
-            //Assert.AreEqual(HttpStatusCode., response.StatusCode);
+            Assert.IsTrue(condition: HttpStatusCode.NoContent == (HttpStatusCode)response.StatusCode);
+        }
+
+
+        [TestMethod]
+        public void UserRoleDelete_InValid()
+        {
+            //Arrange
+            var userRole = new UserRole()
+            {
+                UserRoleID = 10,
+                UserRoleName = "Admin",
+                UserDescription = "He/She has all priviileges",
+            };
+
+            //Act
+            UserRoleCreate_Valid(userRole.UserRoleID.Value, userRole.UserRoleName, userRole.UserDescription);
+            userRole.UserRoleID = 11;
+            var response = _controller.Delete(userRole.UserRoleID.Value) as BadRequestObjectResult;
+
+
+            //Assert
+            Assert.IsTrue(condition: HttpStatusCode.BadRequest == (HttpStatusCode)response.StatusCode);
+            Assert.IsTrue(condition: ErrorCode.DELETEERROR == response.Value.ToString());
+        }
+
+
+        [TestMethod]
+        public void UserRoleFind_Valid()
+        {
+            //Arrange
+            var userRole = new UserRole()
+            {
+                UserRoleID = 10,
+                UserRoleName = "Admin",
+                UserDescription = "He/She has all priviileges",
+            };
+
+            //Act
+            UserRoleCreate_Valid(userRole.UserRoleID.Value, userRole.UserRoleName, userRole.UserDescription);
+            var actionResult = _controller.Find(userRole.UserRoleID.Value);
+
+
+            //Assert
+            var response = actionResult.Result as OkObjectResult;
+            var getUser = (UserRole)response.Value;
+
+            Assert.IsTrue(condition: HttpStatusCode.OK == (HttpStatusCode)response.StatusCode);
+            Assert.AreEqual(expected: userRole.UserRoleID, actual: getUser.UserRoleID);
+            Assert.AreEqual(expected: userRole.UserRoleName, actual: getUser.UserRoleName);
+            Assert.AreEqual(expected: userRole.UserDescription, actual: getUser.UserDescription);
+        }
+
+
+        [TestMethod]
+        public void UserRoleFind_InValid()
+        {
+            //Arrange
+            var userRole = new UserRole()
+            {
+                UserRoleID = 10,
+                UserRoleName = "Admin",
+                UserDescription = "He/She has all priviileges",
+            };
+
+            //Act
+            UserRoleCreate_Valid(userRole.UserRoleID.Value, userRole.UserRoleName, userRole.UserDescription);
+            userRole.UserRoleID = 11;
+            var actionResult = _controller.Find(userRole.UserRoleID.Value) ;
+
+
+            //Assert
+            var response = actionResult.Result as NotFoundResult;
+            Assert.IsTrue(condition: HttpStatusCode.NotFound == (HttpStatusCode)response.StatusCode);
         }
     }
 }
