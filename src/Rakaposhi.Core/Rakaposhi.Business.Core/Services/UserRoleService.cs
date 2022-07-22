@@ -14,6 +14,11 @@ namespace Rakaposhi.Business.Core.Services
 
         public void Add(UserRole userRole)
         {
+            if(userRole.UserRoleID == null)
+            {
+                throw new ServiceException(ErrorCode.ADDERROR);
+            }
+
             _factory.UserRoleRepository.Add(userRole);
         }
 
@@ -23,7 +28,7 @@ namespace Rakaposhi.Business.Core.Services
 
             if (found == null)
             {
-                //Raise Exception
+                throw new ArgumentException(ErrorCode.UPDATEERROR);
             }
 
             _factory.UserRoleRepository.Update(userRole);
@@ -35,14 +40,14 @@ namespace Rakaposhi.Business.Core.Services
 
             if (found == null)
             {
-                //Raise Exception
+                throw new ArgumentException(ErrorCode.DELETEERROR);
             }
 
             _factory.UserRoleRepository.Delete(found);
         }
 
         public UserRole Find(long Id)
-        {   
+        {
             return _factory.UserRoleRepository.Find(Id);
         }
 
