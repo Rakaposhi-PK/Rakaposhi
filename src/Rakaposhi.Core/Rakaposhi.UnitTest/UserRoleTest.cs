@@ -14,6 +14,40 @@ namespace Rakaposhi.UnitTest
     {
         private UserRoleController _controller;
 
+        private static IEnumerable<object[]> userRoles
+        {
+            get
+            {
+                return new[]
+                {
+                    new object[]
+                    {
+                        new List<UserRole>()
+                        {
+                            new UserRole()
+                            {
+                                UserRoleID = 10,
+                                UserRoleName = "Admin",
+                                UserDescription = "AllRights"
+                            },
+                            new UserRole()
+                            {
+                                UserRoleID = 11,
+                                UserRoleName = "Manager",
+                                UserDescription = "SomeRights"
+                            },
+                            new UserRole()
+                            {
+                                UserRoleID = 11,
+                                UserRoleName = "User",
+                                UserDescription = "NoRights"
+                            }
+                        }
+                    }
+                };
+            }
+        } 
+
         public UserRoleTest()
         {
             IRepositoryFactory factory = new FakeDBRepositoryFactory();
@@ -28,7 +62,6 @@ namespace Rakaposhi.UnitTest
         [DataRow(3, "Hamza", "Manager")]
         [DataRow(4, "Arish", "Consultant")]
         [TestMethod]
-        //[DynamicData(nameof(AddUsers))]
         public void UserRoleCreate_Valid(long userId, string userName, string description)
         {
             //Arrange
@@ -45,6 +78,8 @@ namespace Rakaposhi.UnitTest
 
             //Assert
             Assert.IsTrue(condition: HttpStatusCode.Created == (HttpStatusCode)response.StatusCode);
+            Assert.IsNotNull(response);
+            Assert.IsNotNull(newUser);
             Assert.AreEqual(expected: userRole.UserRoleID, actual: newUser.UserRoleID);
             Assert.AreEqual(expected: userRole.UserRoleName, actual: newUser.UserRoleName);
             Assert.AreEqual(expected: userRole.UserDescription, actual: newUser.UserDescription);
@@ -222,6 +257,26 @@ namespace Rakaposhi.UnitTest
             //Assert
             var response = actionResult.Result as NotFoundResult;
             Assert.IsTrue(condition: HttpStatusCode.NotFound == (HttpStatusCode)response.StatusCode);
+        }
+
+
+        [TestMethod]
+        [DynamicData(nameof(userRoles))]
+        public void UserRoleGetAll_Valid(List<UserRole> userRoles)
+        {
+            //Arrange
+            for(int i=0; i<userRoles.Count; i++)
+            {
+                UserRoleCreate_Valid(userRoles[i].UserRoleID.Value, userRoles[i].UserRoleName, userRoles[i].UserDescription);
+            }
+
+            //Act 
+            var response = _controller.GetAll() as OkObjectResult;
+
+            //Assert
+            var allRoles = (IEnumerable<UserRole>)response.Value;
+            Assert.IsNotNull(response);
+            Assert.IsTrue(userRoles.Count == allRoles.Count());
         }
     }
 }
