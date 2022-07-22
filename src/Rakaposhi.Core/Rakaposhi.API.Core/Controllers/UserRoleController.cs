@@ -48,8 +48,17 @@ namespace Rakaposhi.API.Core.Controllers
 
         // DELETE api/<UserRoleController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public ActionResult Delete(long id)
         {
+            try
+            {
+                _userRoleService.Delete(id);
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         // GET api/<UserRoleController>/5
@@ -59,8 +68,12 @@ namespace Rakaposhi.API.Core.Controllers
             try
             {
                 var found = _userRoleService.Find(id);
+                if (found != null)
+                {
+                    return Ok(found);
+                }
 
-                return Ok(found);
+                return NotFound();
             }
             catch (Exception ex)
             {
