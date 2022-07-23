@@ -2,102 +2,87 @@ IF EXISTS(select 1 from sys.databases where [name]='RakaposhiDB')
 	DROP DATABASE [RakaposhiDB]
 GO
 USE [master]
-GO
 CREATE DATABASE [RakaposhiDB]
 GO
+
 USE [RakaposhiDB]
 GO
-/****** Object:  Table [dbo].[USER]    Script Date: 17/07/2022 12:11:26 am ******/
+/****** Object:  Table [dbo].[ROLETABLE]    Script Date: 24/07/2022 12:33:32 am ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[USER](
-	[UserID] [bigint] IDENTITY(1,1) NOT NULL,
-	[Username] [nchar](30) NOT NULL,
-	[Password] [varchar](50) NOT NULL,
-	[EmailAddress] [varchar](50) NULL,
-	[RoleID] [bigint] NOT NULL,
-	[ImageID] [bigint] NOT NULL,
- CONSTRAINT [PK_USER] PRIMARY KEY CLUSTERED 
+CREATE TABLE [dbo].[ROLETABLE](
+	[RecId] [bigint] IDENTITY(1,1) NOT NULL,
+	[Name] [nvarchar](20) NOT NULL,
+	[Description] [nvarchar](50) NULL,
+ CONSTRAINT [PK_USERROLETABLE] PRIMARY KEY CLUSTERED 
 (
-	[UserID] ASC
+	[RecId] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[USERIMAGE]    Script Date: 17/07/2022 12:11:26 am ******/
+/****** Object:  Table [dbo].[USERROLETABLE]    Script Date: 24/07/2022 12:33:32 am ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[USERIMAGE](
-	[ImageID] [bigint] IDENTITY(1,1) NOT NULL,
-	[Image] [image] NOT NULL,
- CONSTRAINT [PK_USERIMAGE] PRIMARY KEY CLUSTERED 
+CREATE TABLE [dbo].[USERROLETABLE](
+	[RecId] [bigint] IDENTITY(1,1) NOT NULL,
+	[UserId] [bigint] NOT NULL,
+	[RoleId] [bigint] NOT NULL,
+ CONSTRAINT [PK_USERROLETABLE_1] PRIMARY KEY CLUSTERED 
 (
-	[ImageID] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
-) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
-GO
-/****** Object:  Table [dbo].[USERROLE]    Script Date: 17/07/2022 12:11:26 am ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [dbo].[USERROLE](
-	[UserRoleID] [bigint] IDENTITY(1,1) NOT NULL,
-	[UserRoleName] [nvarchar](15) NOT NULL,
-	[UserDescription] [nvarchar](50) NULL,
- CONSTRAINT [PK_USERROLE] PRIMARY KEY CLUSTERED 
-(
-	[UserRoleID] ASC
+	[RecId] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-SET IDENTITY_INSERT [dbo].[USERROLE] ON 
-GO
-INSERT [dbo].[USERROLE] ([UserRoleID], [UserRoleName], [UserDescription]) VALUES (2, N'Admin', N'This role has alrights')
-GO
-INSERT [dbo].[USERROLE] ([UserRoleID], [UserRoleName], [UserDescription]) VALUES (10003, N'fake', N'testing')
-GO
-INSERT [dbo].[USERROLE] ([UserRoleID], [UserRoleName], [UserDescription]) VALUES (10004, N'fake', N'testing3')
-GO
-SET IDENTITY_INSERT [dbo].[USERROLE] OFF
-GO
-ALTER TABLE [dbo].[USER]  WITH CHECK ADD  CONSTRAINT [FK_USER_USERIMAGE] FOREIGN KEY([ImageID])
-REFERENCES [dbo].[USERIMAGE] ([ImageID])
-GO
-ALTER TABLE [dbo].[USER] CHECK CONSTRAINT [FK_USER_USERIMAGE]
-GO
-ALTER TABLE [dbo].[USER]  WITH CHECK ADD  CONSTRAINT [FK_USER_USERROLE] FOREIGN KEY([RoleID])
-REFERENCES [dbo].[USERROLE] ([UserRoleID])
-GO
-ALTER TABLE [dbo].[USER] CHECK CONSTRAINT [FK_USER_USERROLE]
-GO
-/****** Object:  StoredProcedure [dbo].[spFindUserRole]    Script Date: 17/07/2022 12:11:27 am ******/
+/****** Object:  Table [dbo].[USERSTATUS]    Script Date: 24/07/2022 12:33:32 am ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-
-CREATE PROCEDURE [dbo].[spFindUserRole]
-	@UserRoleID bigint
-AS
-	SELECT Top 1 UserRoleID, UserRoleName, UserDescription from USERROLE
-		Where UserRoleID = @UserRoleID for json Auto, without_array_wrapper;
+CREATE TABLE [dbo].[USERSTATUS](
+	[RecId] [bigint] IDENTITY(1,1) NOT NULL,
+	[Status] [nvarchar](20) NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[RecId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
 GO
-/****** Object:  StoredProcedure [dbo].[spInsertUserRole]    Script Date: 17/07/2022 12:11:27 am ******/
+/****** Object:  Table [dbo].[USERTABLE]    Script Date: 24/07/2022 12:33:32 am ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-
-CREATE PROCEDURE [dbo].[spInsertUserRole]
-		@UserRoleName nvarchar(15),
-		@UserDescription nvarchar(50)
-AS
-	Insert into USERROLE ([UserRoleName], [UserDescription])
-		values (@UserRoleName, @UserDescription) Select SCOPE_IDENTITY();
+CREATE TABLE [dbo].[USERTABLE](
+	[RecId] [bigint] IDENTITY(1,1) NOT NULL,
+	[Name] [nvarchar](20) NOT NULL,
+	[Password] [nvarchar](20) NOT NULL,
+	[Status] [bigint] NULL,
+ CONSTRAINT [PK_USERTABLE] PRIMARY KEY CLUSTERED 
+(
+	[RecId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[USERTABLE] ADD  CONSTRAINT [default_status]  DEFAULT ((2)) FOR [Status]
+GO
+ALTER TABLE [dbo].[USERROLETABLE]  WITH CHECK ADD  CONSTRAINT [FK_USERROLETABLE_ROLETABLE] FOREIGN KEY([RoleId])
+REFERENCES [dbo].[ROLETABLE] ([RecId])
+GO
+ALTER TABLE [dbo].[USERROLETABLE] CHECK CONSTRAINT [FK_USERROLETABLE_ROLETABLE]
+GO
+ALTER TABLE [dbo].[USERROLETABLE]  WITH CHECK ADD  CONSTRAINT [FK_USERROLETABLE_USERTABLE] FOREIGN KEY([UserId])
+REFERENCES [dbo].[USERTABLE] ([RecId])
+GO
+ALTER TABLE [dbo].[USERROLETABLE] CHECK CONSTRAINT [FK_USERROLETABLE_USERTABLE]
+GO
+ALTER TABLE [dbo].[USERTABLE]  WITH CHECK ADD  CONSTRAINT [fk_user_status] FOREIGN KEY([Status])
+REFERENCES [dbo].[USERTABLE] ([RecId])
+GO
+ALTER TABLE [dbo].[USERTABLE] CHECK CONSTRAINT [fk_user_status]
 GO
 USE [master]
 GO
