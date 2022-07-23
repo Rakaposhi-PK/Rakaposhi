@@ -28,7 +28,7 @@ namespace Rakaposhi.Business.Core.Services
 
             if (found == null)
             {
-                throw new ArgumentException(ErrorCode.UPDATEERROR);
+                throw new ServiceException(ErrorCode.UPDATEERROR);
             }
 
             _factory.UserRoleRepository.Update(userRole);
@@ -40,7 +40,7 @@ namespace Rakaposhi.Business.Core.Services
 
             if (found == null)
             {
-                throw new ArgumentException(ErrorCode.DELETEERROR);
+                throw new ServiceException(ErrorCode.DELETEERROR);
             }
 
             _factory.UserRoleRepository.Delete(found);
