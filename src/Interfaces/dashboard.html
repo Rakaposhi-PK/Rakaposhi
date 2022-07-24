@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <title>Pay-per Call</title>
+
+    <!-- Font Awesome JS -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
+
+    <link href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css">
+
+    <!--Google Fonts-->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@300&family=Roboto+Condensed:wght@300&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+ <nav class="navbar navbar-expand-md navbar-dark fixed-top p-0 bg-dark shadow">
+      <a class="navbar-brand col-sm-3 col-md-2 mr-0 bg-dark" href="#"><img src="images/logo.png" class="image-fluid" style="width:160px; height:45px;"></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav ml-auto" id="riz">
+        <div class="dropdown show">
+            <a class="btn btn-secondary dropdown-toggle" href="#" data-activates="user-dropdown" class="profile-dropdown-button" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <img src="images/img_avatar.png" class="profile-img rounded-circle img-fluid" style="padding-top:-12px;"/>
+            </a>
+
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+              <a class="dropdown-item" href="setting.html"><i class="fa fa-user" style="font-size:small;" aria-hidden="true"></i> Profile</a>
+              <a class="dropdown-item" href="index.html"><i class="fa fa-power-off" style="font-size:small;" aria-hidden="true"></i> Signout</a>
+            </div>
+          </div>
+        </ul>
+      </div>
+  </nav>
+<br>
+    <div class="container-fluid">
+      <div class="row">
+        <nav class="col-md-2 d-none d-md-block fixed-top bg-light sidebar" style="margin-top:55px;">
+          
+            <ul class="nav" style="margin-top:-20px;">
+            <li class="nav-item">
+                <a class="nav-link" href="dashboard.html">
+                  <span data-feather="grid"></span>
+                  Dashboard
+                </a>
+              </li>
+           
+              <li class="nav-item">
+                <a class="nav-link" href="available.html">
+                  <span data-feather="layers"></span>
+                  Available Functions
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="hosted.html">
+                  <span data-feather="upload-cloud"></span>
+                  Hosted Functions
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="subscribed.html">
+                  <span data-feather="bell"></span>
+                  Subscribed Function
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="payment.html">
+                  <span data-feather="credit-card"></span>
+                  Payment
+                </a>
+              </li>
+             
+            </ul>
+        </nav>
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+      
+
+         <!--Profile pic start-->
+<section>
+    <div class="container-fluid">
+        <center>
+        <br><br>
+            <img src="images/img_avatar.png" class="profile-img rounded-circle img-fluid" style="width:110px; height:110px;"/>
+            <br><br>
+            <h4>Welcome, Muhammad Qasim</h4>
+         
+            <p>Your balance info, hosted functions and subscribed functions</p>
+        </center>
+    </div>
+</section>
+<!--Profile ends-->
+<br>
+<div class="row">
+            <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+              <div class="card card-stats">
+                <div class="card-header card-header-warning card-header-icon">
+                  
+                    <img src="images/bal.png" style="width:40px; height:40px;">
+                  
+                  <p class="card-category">Balance</p>
+                  <h3 class="card-title">250
+                    <small>$</small>
+                  </h3>
+                </div>
+                <div class="card-footer">                    
+                    <a href="#" class="warning-link">Withdraw</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+              <div class="card card-stats">
+                <div class="card-header card-header-success card-header-icon">
+                 
+                    <img src="images/bell.png" style="width:40px; height:40px;">
+                 
+                  <p class="card-category">Subscribed Functions</p>
+                  <h3 class="card-title">12</h3>
+                </div>
+                <div class="card-footer">
+                  <div class="stats">
+                    <a href="#" class="warning-link">View Details</a> 
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+              <div class="card card-stats">
+                <div class="card-header card-header-danger card-header-icon">
+                 
+                    <img src="images/cloud.png" style="width:43px; height:43px;">
+                 
+                  <p class="card-category">Active Hosted Functions</p>
+                  <h3 class="card-title">75</h3>
+                </div>
+                <div class="card-footer">
+                  <div class="stats">
+                    <a href="#" class="warning-link">View Details</a> 
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+              <div class="card card-stats">
+                <div class="card-header card-header-info card-header-icon">
+                  
+                    <img src="images/tcloud.png" style="width:42px; height:42px;">
+                  
+                  <p class="card-category">Total Hosted Functions</p>
+                  <h3 class="card-title">245</h3>
+                </div>
+                <div class="card-footer">
+                  <div class="stats">
+                    <a href="#" class="warning-link">View Details</a> 
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+<br>
+<center>
+  <button type="button" class="btn btn-outline-success"><small>View Complete Stats</small></button>
+</center>
+<br><br>
+
+    <div class="container-fluid">
+    <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+              <div class="card">
+                <div class="card-header card-header-primary">
+                  <h4 class="card-title">Hosted Functions</h4>
+                  <p class="card-category">List of Hosted Functions</p>
+                </div>
+                <div class="card-body table-responsive">
+                  <table class="table table-hover">
+                    <thead class="text-warning">
+                      <th>Function Name</th>
+                      <th>Price per Call</th>
+                      <th>Language Name</th>
+                      <th>Function Total Calls</th>
+                      <th>Total Earn</th>
+                      <th>Last Update</th>
+                      <th>Edit</th>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Hello World</td>
+                        <td>230.00$</td>
+                        <td>C#</td>
+                        <td>12</td>
+                        <td>$45,00</td>
+                        <td>Nov 12,2020</td>
+                        <td><button type="button"  class="btn btn-link">Edit</button></td>
+                      </tr>
+                      <tr>
+                        <td>Hello World</td>
+                        <td>230.00$</td>
+                        <td>C#</td>
+                        <td>12</td>
+                        <td>$45,00</td>
+                        <td>Nov 12,2020</td>
+                        <td><button type="button"  class="btn btn-link">Edit</button></td>
+                      </tr>
+                      <tr>
+                        <td>Hello World</td>
+                        <td>230.00$</td>
+                        <td>C#</td>
+                        <td>12</td>
+                        <td>$45,00</td>
+                        <td>Nov 12,2020</td>
+                        <td><button type="button"  class="btn btn-link">Edit</button></td>
+                      </tr>
+                      <tr>
+                        <td>Hello World</td>
+                        <td>230.00$</td>
+                        <td>C#</td>
+                        <td>12</td>
+                        <td>$45,00</td>
+                        <td>Nov 12,2020</td>
+                        <td><button type="button"  class="btn btn-link">Edit</button></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <a href="hosted.html"> <button type="button"  class="btn btn-link">Show More</button></a>
+                </div>
+              </div>
+            </div>
+            </div><!--row end-->
+            <br><br>
+            <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+              <div class="card">
+                <div class="card-header card-header-primary">
+                  <h4 class="card-title">Subscribed Function</h4>
+                  <p class="card-category">List of Subscribed Function</p>
+                </div>
+                <div class="card-body table-responsive">
+                  <table class="table table-hover">
+                    <thead class="text-warning">
+                      <th>Details</th>
+                      <th>Owner</th>
+                      <th>Function Calls</th>
+                      <th>Spent</th>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>XYZ DSAD</td>
+                        <td>Dakota Rice</td>
+                        <td>36,738</td>
+                        <td>$52158</td>
+                      </tr>
+                      <tr>
+                        <td>XYZ DSAD</td>
+                        <td>Dakota Rice</td>
+                        <td>36,738</td>
+                        <td>$52158</td>
+                      </tr>
+                      <tr>
+                        <td>XYZ DSAD</td>
+                        <td>Dakota Rice</td>
+                        <td>36,738</td>
+                        <td>$52158</td>
+                      </tr>
+                      <tr>
+                        <td>XYZ DSAD</td>
+                        <td>Dakota Rice</td>
+                        <td>36,738</td>
+                        <td>$52158</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <a href="hosted.html"> <button type="button"  class="btn btn-link">Show More</button></a>
+                </div>
+              </div>
+            </div>
+                </div>
+            </div>
+            </div><!--row end-->     
+      
+<br><br><br>
+    <!--FOOTER START-->
+  <br><br><br><br><br><br><br><br>
+  <footer class="page-footer font-small ar bg-light">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-9">
+            <p style="margin-top: 14px;">
+              Copyrights &copy; All Rights Reserved by <a class="l24-link l24-link--effect-alpha" href="#">Company</a>
+            </p>
+          </div>
+
+          <div class="col-sm-3">
+            <ul>
+              <li><i class="fa fa-envelope" aria-hidden="true" ></i>&nbsp&nbsp<span style="font-size:0.9em; font-weight:bold; ">pay-percall@gmail.com</span></li>
+              <li><i class="fa fa-phone" aria-hidden="true"></i>&nbsp&nbsp<span style="font-size:0.9em; font-weight:bold;">+92-3386292665</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+  </footer>
+ 
+<!--FOOTER END-->
+
+
+
+   <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>      
+</main>         
+ 
+</div>
+</div>
+           <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+    <script src="../../assets/js/vendor/popper.min.js"></script>
+    <script src="../../dist/js/bootstrap.min.js"></script>
+
+    <!-- Icons -->
+    <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
+    <script>
+      feather.replace()
+    </script>
+    <script src="balance.js">
+
+</script>
+<script src="hostedFunc.js">
+
+</script>
+<script src="subsFunc.js">
+
+</script>
+<script src="app.js">
+
+</script>
+ 
+</body>
+</html>
