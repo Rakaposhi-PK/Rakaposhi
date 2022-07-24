@@ -1,0 +1,149 @@
+
+body {
+    margin:0px;
+    width:100%;
+    text-align:center;
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-family: 'Roboto Condensed', sans-serif;
+    background: url(images/bgg1.jpg);
+    overflow-y: scroll; 
+    
+    background-color:white;
+    font-family: 'arial','Tenor Sans', 'Mukta',sans-serif;
+    /* padding: 25px; */
+    position:relative;
+    overflow-y: scroll;   
+}
+  * {box-sizing: border-box;}
+
+
+ /*login css start*/
+.limiter {
+  width: 100%;
+  margin: 0 auto;  /*auto is for center postion(left and right) and 0 is for top */
+  
+}
+.container-fyp {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+  padding-top: 45px;
+  margin:auto;
+    
+}
+
+.wrap-login100 {
+  width: 390px;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  padding: 37px 55px 33px 55px;
+
+  box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
+  -o-box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
+  -ms-box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
+}
+
+/* [ Form ]*/
+
+.login100-form {
+  width: 100%;
+}  
+.login100-form-title {
+  display: block;
+  font-size: 20px;
+  color: #333333;
+  line-height: 1.2;
+  /* text-align: center; */
+  float:left;
+
+  
+}
+.login100-form-title i {
+  font-size: 0.9em;
+  padding-bottom: 30px;
+}
+/*------------------------------------------------------------------*/
+.input-container{
+position:relative;
+margin-bottom:25px;
+}
+.input-container label{
+position:absolute;
+top:0px;
+left:0px;
+font-size:16px;
+color:black;	
+transition: all 0.5s ease-in-out;
+}
+.input-container input{ 
+border:0;
+border-bottom:1px solid #555;  
+background:transparent;
+width:100%;
+padding:8px 0 5px 0;
+font-size:16px;
+color:black;
+}
+.input-container input:focus{ 
+border:none;	
+outline:none;
+border-bottom:2px solid #3399cc;	
+}
+.input-container input:focus ~ label,
+.input-container input:valid ~ label{
+top:-12px;
+font-size:12px;
+
+}
+/*forgot password*/
+#forgot{
+  font-size: 12px;
+  float:right !important;
+  padding-top: -10px;
+}
+
+/*[ Responsive ]*/
+
+@media (max-width: 576px) {
+.wrap-login100 {
+  padding: 77px 15px 33px 15px;
+}
+}
+
+@media (max-width: 992px) {
+  .alert-validate::before {
+    visibility: visible;
+    opacity: 1;
+  }
+}
+/*login css end*/
+/* SCROLL BAR CSS START*/
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+/* SCROLL BAR CSS ENDS */

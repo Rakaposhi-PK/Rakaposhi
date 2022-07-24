@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <title>Pay-per Call</title>
+
+    <!-- Font Awesome JS -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
+
+    <!--Google Fonts-->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@300&family=Roboto+Condensed:wght@300&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+ <nav class="navbar navbar-expand-md navbar-dark fixed-top p-0 bg-dark shadow">
+      <a class="navbar-brand col-sm-3 col-md-2 mr-0 bg-dark" href="#"><img src="images/logo.png" class="image-fluid" style="width:160px; height:45px;"></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav ml-auto" id="riz">
+            <div class="dropdown show">
+            <a class="btn btn-secondary dropdown-toggle" href="#" data-activates="user-dropdown" class="profile-dropdown-button" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <img src="images/img_avatar.png" class="profile-img rounded-circle img-fluid" style="padding-top:-12px;"/>
+            </a>
+
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+              <a class="dropdown-item" href="setting.html"><i class="fa fa-user" style="font-size:small;" aria-hidden="true"></i> Profile</a>
+              <a class="dropdown-item" href="index.html"><i class="fa fa-power-off" style="font-size:small;" aria-hidden="true"></i> Signout</a>
+            </div>
+          </div>
+        </ul>
+      </div>
+  </nav>
+<br>
+    <div class="container-fluid">
+      <div class="row">
+       <nav class="col-md-2 d-none d-md-block fixed-top bg-light sidebar" style="margin-top:55px;">
+            <ul class="nav" style="margin-top:-20px;">
+            <li class="nav-item">
+                <a class="nav-link" href="dashboard.html">
+                  <span data-feather="grid"></span>
+                  Dashboard
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="available.html">
+                  <span data-feather="layers"></span>
+                  Available Functions
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="hosted.html">
+                  <span data-feather="upload-cloud"></span>
+                  Hosted Functions
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="subscribed.html">
+                  <span data-feather="bell"></span>
+                  Subscribed Function
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="payment.html">
+                  <span data-feather="credit-card"></span>
+                  Payment
+                </a>
+              </li>
+             
+            </ul>
+        </nav>
+        <br>
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+          <br>  <br>
+          <!--HOSTED FUNCTIONS START-->
+    <div class="container-fluid">
+        <div class="row ml-3">
+            <div class="col-lg-8 col-md-8 col-sm-12">
+                <h3>Hosted Functions</h3>
+                
+                <a href="createFunc.html"><button style="background-color: #3399cc; color:#fff;  font-size:0.9em;" type="button" class="btn"><i class="fa fa-code" aria-hidden="true"></i> Create new Function</button></a>
+              
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-12 my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            </div>
+        </div>
+    </div><!--hosted heading end-->
+    <br><br>
+    <div class="container-fluid">
+      <div class="row ml-3">
+        
+              <table>
+                <tr>
+                  <th>Function</th>
+                  <th>Price per Call</th>
+                  <th>Language</th>
+                  <th>Total Calls</th>
+                  <th>Total Earn</th>
+                  <th>Last Update</th>
+                  <th>Edit</th>
+                </tr>
+                <tr>
+                  <td>Hello World</td>
+                  <td>230.00$</td>
+                  <td>C#</td>
+                  <td>12</td>
+                  <td>$45,00</td>
+                  <td>Nov 12,2020</td>
+                  <td><button type="button"  class="btn btn-link">Edit</button></td>
+                </tr>
+                <tr>
+                  <td>Hello World</td>
+                  <td>230.00$</td>
+                  <td>C#</td>
+                  <td>12</td>
+                  <td>$45,00</td>
+                  <td>Nov 12,2020</td>
+                  <td><button type="button"  class="btn btn-link">Edit</button></td>
+                </tr>
+                <tr>
+                  <td>Hello World</td>
+                  <td>230.00$</td>
+                  <td>C#</td>
+                  <td>12</td>
+                  <td>$45,00</td>
+                  <td>Nov 12,2020</td>
+                  <td><button type="button"  class="btn btn-link">Edit</button></td>
+                </tr>
+                <tr>
+                  <td>Hello World</td>
+                  <td>230.00$</td>
+                  <td>C#</td>
+                  <td>12</td>
+                  <td>$45,00</td>
+                  <td>Nov 12,2020</td>
+                  <td><button type="button"  class="btn btn-link">Edit</button></td>
+                </tr>
+                <tr>
+                  <td>Hello World</td>
+                  <td>230.00$</td>
+                  <td>C#</td>
+                  <td>12</td>
+                  <td>$45,00</td>
+                  <td>Nov 12,2020</td>
+                  <td><button type="button"  class="btn btn-link">Edit</button></td>
+                </tr>
+                <tr>
+                  <td>Hello World</td>
+                  <td>230.00$</td>
+                  <td>C#</td>
+                  <td>12</td>
+                  <td>$45,00</td>
+                  <td>Nov 12,2020</td>
+                  <td><button type="button"  class="btn btn-link">Edit</button></td>
+                </tr>
+                <tr>
+                  <td>Hello World</td>
+                  <td>230.00$</td>
+                  <td>C#</td>
+                  <td>12</td>
+                  <td>$45,00</td>
+                  <td>Nov 12,2020</td>
+                  <td><button type="button"  class="btn btn-link">Edit</button></td>
+                </tr>
+                <tr>
+                  <td>Hello World</td>
+                  <td>230.00$</td>
+                  <td>C#</td>
+                  <td>12</td>
+                  <td>$45,00</td>
+                  <td>Nov 12,2020</td>
+                  <td><button type="button"  class="btn btn-link">Edit</button></td>
+                </tr>
+                
+              </table>
+              <a href="#" >&laquo; Previous &nbsp&nbsp</a> 
+              <a href="#" >Next &raquo;</a>
+      </div>
+    </div>
+
+    <!--HOSTED FUNCTIONS END-->
+<br><br>
+    <!--REQUEST LIST START-->
+    <div class="container-fluid">
+        <div class="row ml-3">
+            <div class="col-lg-8 col-md-8 col-sm-12">
+                <h3>Request for Subscription</h3>
+                <a href="#">
+                <button style="background-color: #3399cc; color:#fff;  font-size:0.9em;" type="button" class="btn"><i class="fa fa-plus-circle" aria-hidden="true"></i> Allow</button></a>
+
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-12 my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            </div>
+        </div>
+    </div>
+    <br><br>
+    <!--REQUEST LIST END-->
+
+      
+<br><br><br>
+    <!--FOOTER START-->
+  <br><br><br><br><br><br><br>
+   <footer class="page-footer font-small ar bg-light">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-9">
+            <p style="margin-top: 14px;">
+              Copyrights &copy; All Rights Reserved by <a class="l24-link l24-link--effect-alpha" href="#">Company</a>
+            </p>
+          </div>
+
+          <div class="col-sm-3">
+            <ul>
+              <li><i class="fa fa-envelope" aria-hidden="true" ></i>&nbsp&nbsp<span style="font-size:0.9em; font-weight:bold; ">pay-percall@gmail.com</span></li>
+              <li><i class="fa fa-phone" aria-hidden="true"></i>&nbsp&nbsp<span style="font-size:0.9em; font-weight:bold;">+92-3386292665</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+  </footer>
+ 
+<!--FOOTER END-->
+
+
+
+   <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>      
+</main>         
+ </div>
+</div>
+
+           <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+    <script src="../../assets/js/vendor/popper.min.js"></script>
+    <script src="../../dist/js/bootstrap.min.js"></script>
+
+    <!-- Icons -->
+    <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
+    <script>
+      feather.replace()
+    </script>
+    <script src="balance.js">
+
+</script>
+<script src="hostedFunc.js">
+
+</script>
+<script src="subsFunc.js">
+
+</script>
+<script src="app.js">
+
+</script>
+ 
+</body>
+</html>
