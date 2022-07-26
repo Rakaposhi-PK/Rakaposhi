@@ -12,6 +12,7 @@ namespace Rakaposhi.UnitTest
     [TestClass]
     public class UserRoleTest
     {
+
         private UserRoleController _controller;
 
         private static IEnumerable<object[]> userRoles
