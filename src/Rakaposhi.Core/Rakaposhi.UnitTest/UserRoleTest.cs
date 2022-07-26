@@ -61,9 +61,9 @@ namespace Rakaposhi.UnitTest
         [DataRow(1, "Maaz", "Admin")]
         [DataRow(2, "Taha", "Incharge")]
         [DataRow(3, "Hamza", "Manager")]
-        [DataRow(null, "Arish", "Consultant")]
+        [DataRow(4, "Arish", "Consultant")]
         [TestMethod]
-        public void UserRoleCreate_Valid(long userId, string userName, string description)
+        public void UserRoleCreate_Valid(long userId , string userName, string description)
         {
             //Arrange
             var userRole = new UserRole()
@@ -93,7 +93,7 @@ namespace Rakaposhi.UnitTest
             //Arrange
             var userRole = new UserRole()
             {
-                UserRoleID = null,
+                UserRoleID = 0,
                 UserRoleName = "Maaz",
                 UserDescription = "Consultant"
             };
@@ -104,7 +104,7 @@ namespace Rakaposhi.UnitTest
             //Assert
             Assert.IsTrue(condition: HttpStatusCode.BadRequest == (HttpStatusCode)response.StatusCode);
             Assert.IsTrue(condition: ErrorCode.ADDERROR == response.Value.ToString());
-            Assert.AreEqual(expected: userRole.UserRoleID, actual: null);
+            Assert.AreEqual(expected: userRole.UserRoleID, actual: 0);
         }
 
         

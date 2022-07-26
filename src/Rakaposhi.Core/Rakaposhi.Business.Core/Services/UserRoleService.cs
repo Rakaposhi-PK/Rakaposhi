@@ -14,7 +14,7 @@ namespace Rakaposhi.Business.Core.Services
 
         public void Add(UserRole userRole)
         {
-            if(userRole.UserRoleID == 0)
+            if(userRole.UserRoleID.Value == 0)
             {
                 throw new ServiceException(ErrorCode.ADDERROR);
             }
