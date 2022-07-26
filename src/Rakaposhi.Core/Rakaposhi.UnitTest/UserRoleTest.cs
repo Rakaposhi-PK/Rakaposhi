@@ -61,7 +61,7 @@ namespace Rakaposhi.UnitTest
         [DataRow(1, "Maaz", "Admin")]
         [DataRow(2, "Taha", "Incharge")]
         [DataRow(3, "Hamza", "Manager")]
-        [DataRow(4, "Arish", "Consultant")]
+        [DataRow(null, "Arish", "Consultant")]
         [TestMethod]
         public void UserRoleCreate_Valid(long userId, string userName, string description)
         {
