@@ -22,7 +22,7 @@ jobs:
       with:
         dotnet-version: 6.0.x
     - name: Restore dependencies
-      run: dotnet restore
+      run: dotnet restore src/Rakaposhi.Core/Rakaposhi.Core.sln
     - name: Build
       run: dotnet build src/Rakaposhi.Core/Rakaposhi.Core.sln
     - name: Test
