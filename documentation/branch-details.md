@@ -30,9 +30,8 @@ Before merging feature to staging QA needs to test this branch properly.
 **Note**
 **Developer has to checkout working branch always from feature.**
 
-Naming convention: constant-featurename. <br/>
-constant = feature- <br/>
-name	 = User  <br/>
+Naming convention: constant. <br/>
+constant = feature <br/>
 
 #### Example: feature-user 
 
@@ -45,7 +44,7 @@ constant		= dev- <br/>
 name initials	= mzk <br/>
 assign taks		= continuous integration <br/>
 
-### Example: dev-mazk-continuous-integration
+### Example: dev-mzk-continuous-integration
 
 The following are user intials conventions.<br/>
 Let's suppose, **Maaz Khan**, taking first and last character from first name and the first character from last name.

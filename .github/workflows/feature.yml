@@ -7,7 +7,7 @@ on:
     branches: [ "feature" ]
     
   #Allows you to run this workflow manually from the Actions tab
-  #workflow_dispatch:
+  workflow_dispatch:
   
   
 jobs:
@@ -22,8 +22,8 @@ jobs:
       with:
         dotnet-version: 6.0.x
     - name: Restore dependencies
-      run: dotnet restore
+      run: dotnet restore src/Rakaposhi.Core/Rakaposhi.Core.sln
     - name: Build
-      run: dotnet build --no-restore
+      run: dotnet build src/Rakaposhi.Core/Rakaposhi.Core.sln
     - name: Test
-      run: dotnet test --no-build --verbosity normal
+      run: dotnet test src/Rakaposhi.Core/Rakaposhi.Core.sln
