@@ -4,8 +4,8 @@ networks:
   Rakaposhi-network:
 
 services:
-  RakaposhiBackendApp:
-    image: RakaposhiBackendServices
+  rakaposhi-services:
+    image: RakaposhiServices
     environment:
     - ASPNETCORE_ENVIRONMENT=Development
     - DB_NAME=RakaposhiDB
