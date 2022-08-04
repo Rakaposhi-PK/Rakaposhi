@@ -12,7 +12,7 @@ COPY ["Rakaposhi.Business.Core/Rakaposhi.Business.Core.csproj", "Rakaposhi.Busin
 COPY ["Rakaposhi.Data/Rakaposhi.Data.csproj", "Rakaposhi.Data.csproj/"]
 COPY . .
 WORKDIR "/src/Rakaposhi.API.Core"
-RUN dotnet restore --verbosity "Rakaposhi.API.Core.csproj"
+#RUN dotnet restore --verbosity "Rakaposhi.API.Core.csproj"
 #RUN dotnet restore "/src/Rakaposhi.API.Core/Rakaposhi.API.Core.csproj"
 #COPY . .
 #WORKDIR "/src/Rakaposhi.API.Core"
