@@ -9,4 +9,4 @@ copy ./database/scripts/CreateDB.sql /setup.sql
 copy ./database/storeprocds/*.sql /sps/
 
 ENTRYPOINT ["/bin/bash","entrypoint.sh"]
-#CMD ["/opt/mssql/bin/sqlservr"]
+CMD ["/opt/mssql/bin/sqlservr"]
