@@ -53,5 +53,4 @@ Let's suppose, **Maaz Khan**, taking first and last character from first name an
 |	     USER		 | INITIALS |
 |--------------------|----------|
 |Maaz Khan           | mzk      |
-|--------------------|----------|
 |Mariam Shaikh       | msh      |
