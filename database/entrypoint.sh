@@ -8,7 +8,7 @@ if [ ! -f tmp/app-initialized ]; then
      sleep 90s
 
      /run-script.sh & /opt/mssql/bin/sqlservr
-
+     
      touch tmp/app-initialized
   } 
   initialize_app_database &
