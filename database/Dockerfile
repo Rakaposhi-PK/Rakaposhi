@@ -5,7 +5,7 @@ ENV ACCEPT_EULA Y
 USER root
 
 copy ./database /
-copy scripts/CreateDB.sql /setup.sql
+copy ./database/scripts/CreateDB.sql /setup.sql
 copy ./database/storeprocds/*.sql /sps
 Run rm combine_sps.sql
 Run cat /sps/*.sql > combine_sps.sql
