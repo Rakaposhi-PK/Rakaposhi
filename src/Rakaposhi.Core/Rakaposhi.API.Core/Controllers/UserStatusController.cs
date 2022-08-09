@@ -79,5 +79,20 @@ namespace Rakaposhi.API.Core.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        [HttpGet]
+        public ActionResult GetAll()
+        {
+            try
+            {
+                var userStatusList = _userStatusService.GetAll();
+                return Ok(userStatusList);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+        }
     }
 }
