@@ -6,9 +6,12 @@ USER root
 
 copy ./database /
 copy ./database/scripts/CreateDB.sql /setup.sql
-copy ./database/storeprocds/*.sql /sps
+
+#copy ./database/storeprocds/*.sql /sps
 #Run rm combine_sps.sql
-Run cat /sps/*.sql > combine_sps.sql
+
+copy ./database/procds/*.sql /
+RUN cat /*.sql > /combine_sps.sql
 
 ENTRYPOINT ["/bin/bash","entrypoint.sh"]
 CMD ["/opt/mssql/bin/sqlservr"]
