@@ -5,6 +5,7 @@ namespace Rakaposhi.Business.Core.DBRepository
     public class DBRepositoryFactory : IRepositoryFactory
     {
         private IUserRoleRepository _userRoleRepository;
+        private IUserStatusRepository _userStatusRepository;
 
         public IUserRoleRepository UserRoleRepository
         {
@@ -16,6 +17,19 @@ namespace Rakaposhi.Business.Core.DBRepository
                 }
 
                 return _userRoleRepository;
+            }
+        }
+
+        public IUserStatusRepository UserStatusRepository
+        {
+            get
+            {
+                if( _userStatusRepository is null)
+                {
+                    _userStatusRepository = new UserStatusRepository();
+                }
+
+                return _userStatusRepository;
             }
         }
     }
