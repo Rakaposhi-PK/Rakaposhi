@@ -2,10 +2,11 @@
 using Rakaposhi.Business.Core.DataObjects;
 using Rakaposhi.Data;
 using System.Data.Common;
+using System.Text.Json;
 
 namespace Rakaposhi.Business.Core.DBRepository
 {
-    internal class UserStatusRepository : IUserStatusRepository
+    public class UserStatusRepository : IUserStatusRepository
     {
         private IDatabase _db;
 
@@ -23,22 +24,36 @@ namespace Rakaposhi.Business.Core.DBRepository
 
         public void Delete(UserStatus entity)
         {
-            throw new NotImplementedException();
+            DbCommand cmd = _db.CreateStoreProcedure(storeProcedureName: StoreProcds.DELETE);
+            _db.AddParameter(cmd, paramName: Params.RECID, paramvalue: entity.RecId);
+            _db.Execute(cmd);
         }
 
         public void Update(UserStatus entity)
         {
-            throw new NotImplementedException();
+            DbCommand cmd = _db.CreateStoreProcedure(storeProcedureName: StoreProcds.UPDATE);
+            _db.AddParameter(cmd, paramName: Params.RECID, paramvalue: entity.RecId);
+            _db.AddParameter(cmd, paramName: Params.STATUS, paramvalue: entity.Status);
+            _db.Execute(cmd);
         }
 
-        UserStatus IGenericRepository<UserStatus>.Find(long Id)
+        public UserStatus Find(long Id)
         {
-            throw new NotImplementedException();
+            DbCommand cmd = _db.CreateStoreProcedure(storeProcedureName: StoreProcds.FIND);
+            _db.AddParameter(cmd, paramName: Params.RECID, paramvalue: Id);
+            string found = Convert.ToString(_db.ExecuteScalar(cmd));
+            UserStatus userStatus = JsonSerializer.Deserialize<UserStatus>(found);
+
+            return userStatus;
         }
 
-        IEnumerable<UserStatus> IGenericRepository<UserStatus>.GetAll()
+        public IEnumerable<UserStatus> GetAll()
         {
-            throw new NotImplementedException();
+            DbCommand cmd = _db.CreateStoreProcedure(storeProcedureName: StoreProcds.GETALL);
+            string found = Convert.ToString(_db.ExecuteScalar(cmd));
+            var userStatuses = JsonSerializer.Deserialize<List<UserStatus>>(found);
+            
+            return userStatuses;
         }
 
         private struct StoreProcds
