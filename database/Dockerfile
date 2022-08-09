@@ -10,7 +10,7 @@ copy ./database/scripts/CreateDB.sql /setup.sql
 #copy ./database/storeprocds/*.sql /sps
 #Run rm combine_sps.sql
 
-copy ./database/procds/*.sql /
+copy ./database/storeprocds/*.sql /
 RUN cat /*.sql > /combine_sps.sql
 
 ENTRYPOINT ["/bin/bash","entrypoint.sh"]
