@@ -1,0 +1,38 @@
+version: '3.4'
+
+networks:
+  Rakaposhi-network:
+
+services:
+  rakaposhi-services:
+    image: RakaposhiServices
+    environment:
+    - ASPNETCORE_ENVIRONMENT=Development
+    - DB_NAME=RakaposhiDB
+    - DB_PASSWORD=MyPass@1234
+    - DB_SERVER=db
+    - DB_USERNAME=sa
+    - DB_TYPE=SQL
+    - TRUSTED=False
+    build:
+      context: ./src/Rakaposhi.Core/
+      dockerfile: Dockerfile
+    ports:
+    - "8081:80"
+    networks:
+      - Rakaposhi-network
+    depends_on:
+    - database
+    
+  database:
+    image: RakaposhiDB
+    build:
+      context: .
+      dockerfile: database/Dockerfile
+    networks:
+      - Rakaposhi-network
+    volumes:
+      - rakaposhi-mssqldata:/var/opt/mssql
+
+volumes:
+    rakaposhi-mssqldata:
