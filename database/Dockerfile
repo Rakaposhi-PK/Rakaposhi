@@ -1,4 +1,6 @@
-from mcr.microsoft.com/mssql/server:2019-latest
+#from mcr.microsoft.com/mssql/server:2019-latest
+from mcr.microsoft.com/mssql/server:2017-latest
+
 ENV SA_PASSWORD MyPass@1234
 ENV ACCEPT_EULA Y
 
