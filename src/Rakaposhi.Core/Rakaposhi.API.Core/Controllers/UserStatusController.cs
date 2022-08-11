@@ -21,14 +21,14 @@ namespace Rakaposhi.API.Core.Controllers
             try
             {
                 _userStatusService.Add(userStatus);
-                return Created("Get", userStatus);
 
+                return Created("Get", userStatus);
             }
+
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
-
         }
 
         [HttpPut]
@@ -37,13 +37,13 @@ namespace Rakaposhi.API.Core.Controllers
             try
             {
                 _userStatusService.Update(userStatus);
+
                 return NoContent();
             }
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
-
         }
 
         [HttpDelete("{id}")]
@@ -52,6 +52,7 @@ namespace Rakaposhi.API.Core.Controllers
             try
             {
                 _userStatusService.Delete(id);
+
                 return NoContent();
             }
             catch(Exception ex)
@@ -66,7 +67,7 @@ namespace Rakaposhi.API.Core.Controllers
             var found = _userStatusService.Find(id);
             try
             {
-                if (found !=null)
+                if (found != null)
                 {
                     return Ok(found);
                 }
@@ -86,13 +87,13 @@ namespace Rakaposhi.API.Core.Controllers
             try
             {
                 var userStatusList = _userStatusService.GetAll();
+
                 return Ok(userStatusList);
             }
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
-
         }
     }
 }
