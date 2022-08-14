@@ -47,7 +47,7 @@ namespace Rakaposhi.UnitTest
             }
         }
 
-        public TransTypeTest(TransTypeController controller)
+        public TransTypeTest()
         {
             IRepositoryFactory factory = new FakeDBRepositoryFactory();
             TransTypeService transTypeService = new TransTypeService(factory);
@@ -75,7 +75,7 @@ namespace Rakaposhi.UnitTest
             var newtranstype = (TransType)response.Value;
 
             //Assert
-            Assert.IsTrue(condition: HttpStatusCode.Created == (HttpStatusCode)response.StatusCode);
+            Assert.AreEqual(HttpStatusCode.Created, (HttpStatusCode)response.StatusCode);
             Assert.IsNotNull(response);
             Assert.IsNotNull(newtranstype);
             Assert.AreEqual(expected: transType.RecId, actual: newtranstype.RecId);
@@ -125,8 +125,8 @@ namespace Rakaposhi.UnitTest
         }
 
         [DataTestMethod]
-        [DataRow(1, "User1", "User1Transactiontype")]
-        [DataRow(1, "User2", "User2Transactiontype")]
+        [DataRow(1, "User1", "User1Transactiontype",2)]
+        [DataRow(1, "User2", "User2Transactiontype",2)]
         public void TransTypeUpdate_Invalid(long id, string name, string description, long updatedId)
         {
             //Arrange
