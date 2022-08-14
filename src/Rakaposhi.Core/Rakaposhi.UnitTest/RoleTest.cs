@@ -59,8 +59,8 @@ namespace Rakaposhi.UnitTest
         [DataRow(1, "User1", "User1Description")]
         [DataRow(1, "User2", "User2Description")]
         [DataRow(1, "User3", "User3Description")]
-
         [TestMethod]
+
         public void RoleCreate_Valid(long id, string name, string description)
         {
             //Arrange
@@ -105,6 +105,7 @@ namespace Rakaposhi.UnitTest
         [DataRow(1, "User1", "User1Description")]
         [DataRow(1, "User2", "User2Description")]
         [TestMethod]
+
         public void RoleUpdate_Valid(long id, string name, string description)
         {
             //Arrange
@@ -114,8 +115,8 @@ namespace Rakaposhi.UnitTest
             var updatedRole = new Role()
             {
                 RecId = id,
-                Name= "User2",
-                Description= "FakeDescription"
+                Name = "User2",
+                Description = "FakeDescription"
             };
 
             var response = _controller.Update(updatedRole) as NoContentResult;
