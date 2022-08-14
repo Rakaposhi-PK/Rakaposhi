@@ -71,7 +71,7 @@ namespace Rakaposhi.UnitTest
             var newUserStatus = (UserStatus)response.Value;
 
             //Assert
-            Assert.IsTrue(condition: HttpStatusCode.Created == (HttpStatusCode)response.StatusCode);
+            Assert.AreEqual(HttpStatusCode.Created, (HttpStatusCode)response.StatusCode);
             Assert.IsNotNull(value: newUserStatus);
             Assert.AreEqual(expected: userStatus.RecId, actual: newUserStatus.RecId);
             Assert.AreEqual(expected: userStatus.Status, actual: newUserStatus.Status);
@@ -91,8 +91,8 @@ namespace Rakaposhi.UnitTest
             var response = _controller.Create(userStatus) as BadRequestObjectResult;
 
             //Assert
-            Assert.IsTrue(condition: HttpStatusCode.BadRequest == (HttpStatusCode)response.StatusCode);
-            Assert.IsTrue(condition: ErrorCode.ADDERROR == response.Value.ToString());
+            Assert.AreEqual(HttpStatusCode.BadRequest, (HttpStatusCode)response.StatusCode);
+            Assert.AreEqual(ErrorCode.ADDERROR, response.Value.ToString());
             Assert.AreEqual(expected: userStatus.RecId, actual: null);
         }
 
@@ -114,7 +114,7 @@ namespace Rakaposhi.UnitTest
             var response = _controller.Update(updatedUserStatus) as NoContentResult;
 
             //Assert
-            Assert.IsTrue(condition: HttpStatusCode.NoContent == (HttpStatusCode)response.StatusCode);
+            Assert.AreEqual(HttpStatusCode.NoContent, (HttpStatusCode)response.StatusCode);
         }
 
         [DataTestMethod]
