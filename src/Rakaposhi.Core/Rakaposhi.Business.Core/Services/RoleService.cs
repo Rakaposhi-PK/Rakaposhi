@@ -48,7 +48,6 @@ namespace Rakaposhi.Business.Core.Services
 
         public Role Find(long id)
         {
-        
             return _factory.RoleRepository.Find(id);
         }
 

@@ -15,7 +15,7 @@ GO
 CREATE PROCEDURE dbo.spGetAllRole
 	
 AS
-	SELECT RecId, Name, Description FROM ROLETABLE 
+	SELECT RecId, [Name], [Description] FROM ROLETABLE 
 	FOR JSON AUTO
 GO
 

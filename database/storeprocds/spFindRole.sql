@@ -15,7 +15,7 @@ GO
 CREATE PROCEDURE dbo.spFindRole
 	@RecId bigint
 AS
-	SELECT Top 1 RecId, Name, Description FROM ROLETABLE
+	SELECT TOP 1 RecId, [Name], [Description] FROM ROLETABLE
 	WHERE RecId = @RecId FOR JSON AUTO, WITHOUT_ARRAY_WRAPPER
 GO
 

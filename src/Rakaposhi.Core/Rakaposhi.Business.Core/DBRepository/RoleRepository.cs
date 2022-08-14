@@ -18,8 +18,8 @@ namespace Rakaposhi.Business.Core.DBRepository
         public void Add(Role entity)
         {
             DbCommand cmd = _db.CreateStoreProcedure(storeProcedureName: StoreProcds.INSERT);
-            _db.AddParameter(cmd, paramName: Params.NAME, entity.Name);
-            _db.AddParameter(cmd, paramName: Params.DESCRIPTION, entity.Description);
+            _db.AddParameter(cmd, paramName: Params.NAME, paramvalue: entity.Name);
+            _db.AddParameter(cmd, paramName: Params.DESCRIPTION, paramvalue: entity.Description);
             entity.RecId = Convert.ToInt64(_db.ExecuteScalar(cmd));
         }
 
@@ -44,7 +44,7 @@ namespace Rakaposhi.Business.Core.DBRepository
             DbCommand cmd = _db.CreateStoreProcedure(storeProcedureName: StoreProcds.FIND);
             _db.AddParameter(cmd, paramName: Params.RECID, paramvalue: Id);
             string found = Convert.ToString(_db.ExecuteScalar(cmd));
-            Role role = string.IsNullOrEmpty(found) ? null: JsonSerializer.Deserialize<Role>(found);
+            Role role = JsonSerializer.Deserialize<Role>(found);
 
             return role;
         }

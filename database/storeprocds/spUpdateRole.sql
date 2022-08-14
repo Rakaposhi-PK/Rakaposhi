@@ -20,7 +20,7 @@ AS
 	IF(@RecId IS NOT NULL)
 	BEGIN
 	UPDATE ROLETABLE
-	SET [Name] = @Name, Description = @Description
+	SET [Name] = @Name, [Description] = @Description
 	WHERE RecId = @RecId
 	END
 GO

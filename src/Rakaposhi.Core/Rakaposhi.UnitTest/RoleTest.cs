@@ -98,12 +98,13 @@ namespace Rakaposhi.UnitTest
 
             //Assert
             Assert.AreEqual(HttpStatusCode.BadRequest, (HttpStatusCode)response.StatusCode);
-            Assert.IsTrue(condition: ErrorCode.ADDERROR == response.Value.ToString());
+            Assert.AreEqual(ErrorCode.ADDERROR, response.Value.ToString());
         }
 
         [DataTestMethod]
         [DataRow(1, "User1", "User1Description")]
         [DataRow(1, "User2", "User2Description")]
+        [TestMethod]
         public void RoleUpdate_Valid(long id, string name, string description)
         {
             //Arrange
@@ -126,6 +127,7 @@ namespace Rakaposhi.UnitTest
         [DataTestMethod]
         [DataRow(1, "User1", "User1Description", 2)]
         [DataRow(1, "User2", "User2Description", 3)]
+        [TestMethod]
 
         public void RoleUpdate_Invalid(long id, string name, string description, long updatedId)
         {
@@ -150,6 +152,8 @@ namespace Rakaposhi.UnitTest
         [DataTestMethod]
         [DataRow(1, "User1", "User1Description")]
         [DataRow(1, "User2", "User2Description")]
+        [TestMethod]
+
         public void RoleDelete_Valid(long id, string name, string description)
         {
             //Arrange
@@ -165,6 +169,8 @@ namespace Rakaposhi.UnitTest
         [DataTestMethod]
         [DataRow(1, "User1", "User1Description")]
         [DataRow(1, "User2", "User2Description")]
+        [TestMethod]
+
         public void RoleDelete_Invalid(long id, string name, string description)
         {
             //Arrange
@@ -235,11 +241,10 @@ namespace Rakaposhi.UnitTest
             //Act
             var response = _controller.GetAll() as OkObjectResult;
             var allRoles = (IEnumerable<Role>)response.Value;
+
             //Assert
-
             Assert.IsNotNull(response);
-            Assert.AreEqual(roles.Count, roles.Count());
+            Assert.AreEqual(roles.Count, allRoles.Count());
         }
-
     }
 }

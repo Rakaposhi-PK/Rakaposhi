@@ -37,13 +37,13 @@ namespace Rakaposhi.API.Core.Controllers
             try
             {
                 _roleService.Update(userStatus);
+
                 return NoContent();
             }
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
-
         }
 
         [HttpDelete("{id}")]
@@ -88,13 +88,13 @@ namespace Rakaposhi.API.Core.Controllers
             try
             {
                 var userStatusList = _roleService.GetAll();
+
                 return Ok(userStatusList);
             }
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
-
         }
     }
 }
