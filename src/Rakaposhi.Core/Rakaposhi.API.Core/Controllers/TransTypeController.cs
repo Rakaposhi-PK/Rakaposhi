@@ -16,34 +16,34 @@ namespace Rakaposhi.API.Core.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create([FromBody] TransType transactionTypes)
+        public ActionResult Create([FromBody] TransType transactionType)
         {
             try
             {
-                _transTypeService.Add(transactionTypes);
-                return Created("Get", transactionTypes);
+                _transTypeService.Add(transactionType);
+
+                return Created("Get", transactionType);
 
             }
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
-
         }
 
         [HttpPut]
-        public ActionResult Update([FromBody] TransType transactionTypes)
+        public ActionResult Update([FromBody] TransType transactionType)
         {
             try
             {
-                _transTypeService.Update(transactionTypes);
+                _transTypeService.Update(transactionType);
+
                 return NoContent();
             }
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
-
         }
 
         [HttpDelete("{id}")]
@@ -52,6 +52,7 @@ namespace Rakaposhi.API.Core.Controllers
             try
             {
                 _transTypeService.Delete(id);
+
                 return NoContent();
             }
             catch (Exception ex)
@@ -73,7 +74,6 @@ namespace Rakaposhi.API.Core.Controllers
 
                 return NotFound();
             }
-
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
@@ -85,8 +85,9 @@ namespace Rakaposhi.API.Core.Controllers
         {
             try
             {
-                var transactionTypesList = _transTypeService.GetAll();
-                return Ok(transactionTypesList);
+                var transactionTypeList = _transTypeService.GetAll();
+
+                return Ok(transactionTypeList);
             }
             catch (Exception ex)
             {
