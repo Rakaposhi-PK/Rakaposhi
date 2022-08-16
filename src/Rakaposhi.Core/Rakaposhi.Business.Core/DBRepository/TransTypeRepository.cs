@@ -73,6 +73,5 @@ namespace Rakaposhi.Business.Core.DBRepository
             public const string NAME = "Name";
             public const string DESCRIPTION = "Description";
         }
-
     }
 }

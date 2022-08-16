@@ -46,6 +46,5 @@ namespace Rakaposhi.Business.Core.DBRepository
                 return _transTypeRepository;
             }
         }
-
     }
 }

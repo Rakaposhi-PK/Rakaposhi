@@ -4,6 +4,5 @@ namespace Rakaposhi.Business.Core.BaseRepository
 {
     public interface ITransTypeRepository : IGenericRepository<TransType>
     {
-
     }
 }

@@ -46,7 +46,5 @@ namespace Rakaposhi.Business.Core.FakeRepository
                 return _transTypeRepository;
             }
         }
-
-        
     }
 }
