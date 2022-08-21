@@ -44,7 +44,8 @@ namespace Rakaposhi.Business.Core.DBRepository
             DbCommand cmd = _db.CreateStoreProcedure(storeProcedureName: StoreProcds.FIND);
             _db.AddParameter(cmd, paramName: Params.RECID, paramvalue: Id);
             string found = Convert.ToString(_db.ExecuteScalar(cmd));
-            Role role = JsonSerializer.Deserialize<Role>(found);
+            Role role = string.IsNullOrEmpty(found) ? null :
+                JsonSerializer.Deserialize<Role>(found);
 
             return role;
         }
@@ -53,7 +54,8 @@ namespace Rakaposhi.Business.Core.DBRepository
         {
             DbCommand cmd = _db.CreateStoreProcedure(storeProcedureName: StoreProcds.GETALL);
             string found = Convert.ToString(_db.ExecuteScalar(cmd));
-            var roles = JsonSerializer.Deserialize<List<Role>>(found);
+            var roles = string.IsNullOrEmpty(found) ? null :
+                JsonSerializer.Deserialize<List<Role>>(found);
 
             return roles;
         }
