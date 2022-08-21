@@ -18,8 +18,8 @@ namespace Rakaposhi.Business.Core.DBRepository
         public void Add(TransType entity)
         {
             DbCommand cmd = _db.CreateStoreProcedure(storeProcedureName: StoreProcds.INSERT);
-            _db.AddParameter(cmd, paramName: Params.NAME, entity.Name);
-            _db.AddParameter(cmd, paramName: Params.DESCRIPTION, entity.Description);
+            _db.AddParameter(cmd, paramName: Params.NAME, paramvalue: entity.Name);
+            _db.AddParameter(cmd, paramName: Params.DESCRIPTION, paramvalue: entity.Description);
             entity.RecId = Convert.ToInt64(_db.ExecuteScalar(cmd));
         }
 

@@ -65,6 +65,7 @@ namespace Rakaposhi.API.Core.Controllers
         public ActionResult<TransType> Find(long id)
         {
             var found = _transTypeService.Find(id);
+
             try
             {
                 if (found != null)
@@ -93,7 +94,6 @@ namespace Rakaposhi.API.Core.Controllers
             {
                 return BadRequest(ex.Message);
             }
-
         }
     }
 }

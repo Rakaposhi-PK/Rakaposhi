@@ -15,7 +15,7 @@ GO
 CREATE PROCEDURE dbo.spFindTransactionType
 	@RecId bigint
 AS
-	SELECT Top 1 RecId, Name, Description FROM TRANSTYPE
+	SELECT TOP 1 RecId, [Name], [Description] FROM TRANSTYPE
 	WHERE RecId = @RecId FOR JSON AUTO, WITHOUT_ARRAY_WRAPPER;
 GO
 

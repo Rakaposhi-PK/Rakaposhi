@@ -18,7 +18,7 @@ CREATE PROCEDURE dbo.spInsertTransactionType
 AS
 	IF (@Name IS NOT NULL)
 	BEGIN
-	INSERT INTO TRANSTYPE(Name,Description)
+	INSERT INTO TRANSTYPE([Name],[Description])
 	VALUES (@Name,@Description)
 	SELECT SCOPE_IDENTITY();
 	END

@@ -12,7 +12,7 @@ namespace Rakaposhi.Business.Core.DBRepository
         {
             get
             {
-                if (_userRoleRepository is null)
+                if(_userRoleRepository is null)
                 {
                     _userRoleRepository = new UserRoleRepository();
                 }
@@ -25,7 +25,7 @@ namespace Rakaposhi.Business.Core.DBRepository
         {
             get
             {
-                if (_userStatusRepository is null)
+                if(_userStatusRepository is null)
                 {
                     _userStatusRepository = new UserStatusRepository();
                 }
@@ -38,7 +38,7 @@ namespace Rakaposhi.Business.Core.DBRepository
         {
             get
             {
-                if (_transTypeRepository is null)
+                if(_transTypeRepository is null)
                 {
                     _transTypeRepository = new TransTypeRepository();
                 }

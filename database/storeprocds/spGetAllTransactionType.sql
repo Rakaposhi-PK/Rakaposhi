@@ -15,7 +15,7 @@ GO
 CREATE PROCEDURE dbo.spGetAllTransactionType
 	
 AS
-	SELECT RecId, Name, Description FROM TRANSTYPE 
+	SELECT RecId, [Name], [Description] FROM TRANSTYPE 
 	FOR JSON AUTO
 GO
 
