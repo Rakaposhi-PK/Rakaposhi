@@ -6,25 +6,25 @@ namespace Rakaposhi.API.Core.Controllers
 {
     [Route(Global.APICONTROLLER)]
     [ApiController]
-    public class UserStatusController : Controller
+    public class RoleController : Controller
     {
-        private UserStatusService _userStatusService;
+        private RoleService _roleService;
 
-        public UserStatusController(UserStatusService userStatusService)
+        public RoleController(RoleService roleService)
         {
-            _userStatusService = userStatusService;
+            _roleService = roleService;
         }
 
         [HttpPost]
-        public ActionResult Create([FromBody] UserStatus userStatus)
+        public ActionResult Create([FromBody] Role roles)
         {
             try
             {
-                _userStatusService.Add(userStatus);
+                _roleService.Add(roles);
 
-                return Created("Get", userStatus);
+                return Created("Get", roles);
+
             }
-
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
@@ -32,11 +32,11 @@ namespace Rakaposhi.API.Core.Controllers
         }
 
         [HttpPut]
-        public ActionResult Update([FromBody] UserStatus userStatus)
+        public ActionResult Update([FromBody] Role userStatus)
         {
             try
             {
-                _userStatusService.Update(userStatus);
+                _roleService.Update(userStatus);
 
                 return NoContent();
             }
@@ -51,11 +51,11 @@ namespace Rakaposhi.API.Core.Controllers
         {
             try
             {
-                _userStatusService.Delete(id);
+                _roleService.Delete(id);
 
                 return NoContent();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
@@ -64,7 +64,8 @@ namespace Rakaposhi.API.Core.Controllers
         [HttpGet("{id}")]
         public ActionResult<UserStatus> Find(long id)
         {
-            var found = _userStatusService.Find(id);
+            var found = _roleService.Find(id);
+
             try
             {
                 if (found != null)
@@ -75,7 +76,7 @@ namespace Rakaposhi.API.Core.Controllers
                 return NotFound();
             }
 
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
@@ -86,7 +87,7 @@ namespace Rakaposhi.API.Core.Controllers
         {
             try
             {
-                var userStatusList = _userStatusService.GetAll();
+                var userStatusList = _roleService.GetAll();
 
                 return Ok(userStatusList);
             }

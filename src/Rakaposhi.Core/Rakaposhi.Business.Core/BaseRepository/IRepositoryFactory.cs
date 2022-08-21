@@ -4,6 +4,7 @@
     {
         public IUserRoleRepository UserRoleRepository { get; }
         public IUserStatusRepository UserStatusRepository { get; }
+        public IRoleRepository RoleRepository { get; }    
         public ITransTypeRepository TransTypeRepository { get; }
     }
 }

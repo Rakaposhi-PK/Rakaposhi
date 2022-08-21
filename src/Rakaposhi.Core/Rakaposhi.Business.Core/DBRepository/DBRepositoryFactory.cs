@@ -6,6 +6,7 @@ namespace Rakaposhi.Business.Core.DBRepository
     {
         private IUserRoleRepository _userRoleRepository;
         private IUserStatusRepository _userStatusRepository;
+        private IRoleRepository _roleRepository;
         private ITransTypeRepository _transTypeRepository;
 
         public IUserRoleRepository UserRoleRepository
@@ -32,8 +33,21 @@ namespace Rakaposhi.Business.Core.DBRepository
 
                 return _userStatusRepository;
             }
-        }
+        }    
+         
+        public IRoleRepository RoleRepository
+        {
+            get
+            {
+                if(_roleRepository is null)
+                {
+                    _roleRepository = new RoleRepository();
+                }
 
+                return _roleRepository;
+            }
+        }
+        
         public ITransTypeRepository TransTypeRepository
         {
             get
