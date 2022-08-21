@@ -1,12 +1,12 @@
 ﻿using Rakaposhi.Business.Core.BaseRepository;
 using Rakaposhi.Business.Core.DataObjects;
 
-
 namespace Rakaposhi.Business.Core.Services
 {
     public class UserStatusService: IService
     {
         private IRepositoryFactory _factory;
+
         public UserStatusService(IRepositoryFactory factory)
         {
             _factory = factory;
@@ -25,6 +25,7 @@ namespace Rakaposhi.Business.Core.Services
         public void Update(UserStatus userStatus)
         {
             var found = _factory.UserStatusRepository.Find(userStatus.RecId.Value);
+           
             if(found == null)
             {
                 throw new ServiceException(ErrorCode.UPDATEERROR);
@@ -35,7 +36,11 @@ namespace Rakaposhi.Business.Core.Services
         public void Delete(long id)
         {
             var found = _factory.UserStatusRepository.Find(id);
-
+            
+            if (found == null)
+            {
+                throw new ServiceException(ErrorCode.DELETEERROR);
+            }
 
             _factory.UserStatusRepository.Delete(found);
         }
