@@ -8,10 +8,10 @@ namespace Rakaposhi.Business.Core.DataObjects
         public long? RecId { get; set; }
 
         [Required]
-        public long? UserId { get; set; }
+        public long UserId { get; set; }
 
         [Required]
-        public long? Transtype { get; set; }
+        public long Transtype { get; set; }
 
         [Required]
         public decimal Amount { get; set; }
