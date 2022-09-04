@@ -88,6 +88,7 @@ namespace Rakaposhi.API.Core.Controllers
             try
             {
                 var userStatusList = _transService.GetAll();
+
                 return Ok(userStatusList);
             }
             catch (Exception ex)

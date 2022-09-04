@@ -15,7 +15,7 @@ GO
 CREATE PROCEDURE dbo.spDeleteTransaction
 	@RecId bigint
 AS
-	DELETE FROM USERSTATUS 
+	DELETE FROM TRANSTABLE
 	WHERE RecId = @RecId
 GO
 

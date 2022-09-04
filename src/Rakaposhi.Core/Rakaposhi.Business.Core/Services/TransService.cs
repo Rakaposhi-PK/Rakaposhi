@@ -18,7 +18,6 @@ namespace Rakaposhi.Business.Core.Services
             {
                 throw new ServiceException(ErrorCode.ADDERROR);
             }
-
             _factory.TransRepository.Add(trans);
 
         }

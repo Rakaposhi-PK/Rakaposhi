@@ -80,7 +80,6 @@ namespace Rakaposhi.Business.Core.DBRepository
             public const string TRANSTYPE = "TransType";
             public const string AMOUNT = "Amount";
             public const string DATE = "Date";
-
         }
     }
 }
