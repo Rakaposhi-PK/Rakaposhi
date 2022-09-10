@@ -18,40 +18,47 @@ namespace Rakaposhi.Business.Core.DBRepository
         public void Add(UserRole entity)
         {
             DbCommand cmd = _db.CreateStoreProcedure(storeProcedureName: StoreProcds.INSERT);
-            _db.AddParameter(cmd, paramName: Params.USERROLENAME, entity.UserRoleName);
-            _db.AddParameter(cmd, paramName: Params.USERDESCRIPTION, entity.UserDescription);
-            entity.UserRoleID = Convert.ToInt64(_db.ExecuteScalar(cmd));
+            _db.AddParameter(cmd, paramName: Params.USERID, entity.UserId);
+            _db.AddParameter(cmd, paramName: Params.ROLEID, entity.RoleId);
+            entity.RecId = Convert.ToInt64(_db.ExecuteScalar(cmd));
         }
 
         public void Delete(UserRole entity)
         {
-            throw new NotImplementedException();
+            DbCommand cmd = _db.CreateStoreProcedure(storeProcedureName: StoreProcds.DELETE);
+            _db.AddParameter(cmd, paramName: Params.RECID, paramvalue: entity.RecId);
+            _db.Execute(cmd);
         }
 
         public UserRole Find(long Id)
         {
             DbCommand cmd = _db.CreateStoreProcedure(storeProcedureName: StoreProcds.FIND);
-            _db.AddParameter(cmd, paramName: Params.USERROLEID, Id);
+            _db.AddParameter(cmd, paramName: Params.RECID, Id);
             string found = Convert.ToString(_db.ExecuteScalar(cmd));
-            UserRole result = JsonSerializer.Deserialize<UserRole>(found);
+            UserRole result = string.IsNullOrEmpty(found) ? null :
+                JsonSerializer.Deserialize<UserRole>(found);
 
             return result;
         }
 
         public IEnumerable<UserRole> GetAll()
         {
-            throw new NotImplementedException();
+            DbCommand cmd = _db.CreateStoreProcedure(storeProcedureName: StoreProcds.GETALL);
+            string found = Convert.ToString(_db.ExecuteScalar(cmd));
+            var userRoles = string.IsNullOrEmpty(found) ? null : 
+                JsonSerializer.Deserialize<List<UserRole>>(found);
+
+            return userRoles;
         }
 
         public void Update(UserRole entity)
         {
             DbCommand cmd = _db.CreateStoreProcedure(storeProcedureName: StoreProcds.UPDATE);
-            _db.AddParameter(cmd, paramName: Params.USERROLEID, entity.UserRoleID);
-            _db.AddParameter(cmd, paramName: Params.USERROLENAME, entity.UserRoleName);
-            _db.AddParameter(cmd, paramName: Params.USERDESCRIPTION, entity.UserDescription);
+            _db.AddParameter(cmd, paramName: Params.RECID, entity.RecId);
+            _db.AddParameter(cmd, paramName: Params.USERID, entity.UserId);
+            _db.AddParameter(cmd, paramName: Params.ROLEID, entity.RoleId);
             _db.Execute(cmd);
         }
-
 
         private struct StoreProcds
         {
@@ -64,9 +71,9 @@ namespace Rakaposhi.Business.Core.DBRepository
 
         private struct Params
         {
-            public const string USERROLEID = "UserRoleID";
-            public const string USERROLENAME = "UserRoleName";
-            public const string USERDESCRIPTION = "UserDescription";
+            public const string RECID = "RecId";
+            public const string USERID = "UserId";
+            public const string ROLEID = "RoleId";
         }
     }
 }
