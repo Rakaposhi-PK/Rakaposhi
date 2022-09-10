@@ -4,7 +4,7 @@ namespace Rakaposhi.Business.Core.FakeRepository
 {
     public class FakeDBRepositoryFactory : IRepositoryFactory
     {
-        private IUserRoleRepository _userRepository;
+        private IUserRoleRepository _userRoleRepository;
         private IUserStatusRepository _userStatusRepository;
         private IRoleRepository _roleRepository;
 
@@ -12,12 +12,12 @@ namespace Rakaposhi.Business.Core.FakeRepository
         {
             get
             {
-                if(_userRepository is null)
+                if(_userRoleRepository is null)
                 {
-                    _userRepository = new FakeUserRoleRepository();
+                    _userRoleRepository = new FakeUserRoleRepository();
                 }
 
-                return _userRepository;
+                return _userRoleRepository;
             }
         }
 
