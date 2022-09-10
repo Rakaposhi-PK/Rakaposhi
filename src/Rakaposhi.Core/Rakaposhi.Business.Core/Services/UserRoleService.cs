@@ -14,7 +14,7 @@ namespace Rakaposhi.Business.Core.Services
 
         public void Add(UserRole userRole)
         {
-            if(userRole.UserRoleID == null)
+            if(userRole.RecId == null)
             {
                 throw new ServiceException(ErrorCode.ADDERROR);
             }
@@ -24,7 +24,7 @@ namespace Rakaposhi.Business.Core.Services
 
         public void Update(UserRole userRole)
         {
-            var found = _factory.UserRoleRepository.Find(userRole.UserRoleID.Value);
+            var found = _factory.UserRoleRepository.Find(userRole.RecId.Value);
 
             if (found == null)
             {
