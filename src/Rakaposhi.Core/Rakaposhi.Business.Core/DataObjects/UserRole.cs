@@ -5,13 +5,13 @@ namespace Rakaposhi.Business.Core.DataObjects
     public class UserRole : EntityBase
     {
         [Required]
-        public long? UserRoleID { get; set; }
+        public long? RecId { get; set; }
 
         [Required]
-        public string UserRoleName { get; set; }
+        public long UserId { get; set; }
         
-        public string UserDescription { get; set; }
+        public long RoleId { get; set; }
 
-        public override long Key { get => this.UserRoleID.Value; }
+        public override long Key { get => this.RecId.Value; }
     }
 }
