@@ -62,12 +62,12 @@ namespace Rakaposhi.UnitTest
         }
 
         [DataTestMethod]
-        [DataRow(1, 1, 1, 2323, "22/08/2022")]
-        [DataRow(2, 1, 1, 2323, "22/08/2022")]
-        [DataRow(3, 1, 1, 2323, "22/08/2022")]
+        [DataRow(1, 1, 1, typeof(decimal))]
+        [DataRow(2, 1, 1, typeof(decimal))]
+        [DataRow(3, 1, 1, typeof(decimal))]
 
         [TestMethod]
-        public void TransCreate_Valid(long recId, long userId, long transType, int amount, string date)
+        public void TransCreate_Valid(long recId, long userId, long transType, decimal amount)
         {
             //Arrange
             var trans = new Trans()
@@ -76,7 +76,7 @@ namespace Rakaposhi.UnitTest
                 UserId = userId,
                 Transtype = transType,
                 Amount = Convert.ToDecimal(amount),
-                Date = Convert.ToDateTime(date)
+                Date = DateTime.Now
             };
 
             //Act
@@ -99,7 +99,7 @@ namespace Rakaposhi.UnitTest
                 UserId = 1,
                 Transtype = 1,
                 Amount = Convert.ToDecimal(123),
-                Date = Convert.ToDateTime("22/08/2022")
+                Date = DateTime.Now
             };
 
             //Act
@@ -111,14 +111,14 @@ namespace Rakaposhi.UnitTest
         }
 
         [DataTestMethod]
-        [DataRow(1, 1, 1, 2323, "22/08/2022")]
-        [DataRow(2, 1, 1, 2323, "22/08/2022")]
+        [DataRow(1, 1, 1, typeof(decimal))]
+        [DataRow(2, 1, 1, typeof(decimal))]
         [TestMethod]
 
-        public void TransUpdate_Valid(long recId, long userId, long transType, int amount, string date)
+        public void TransUpdate_Valid(long recId, long userId, long transType, decimal amount)
         {
             //Arrange
-            TransCreate_Valid(recId, userId, transType, amount, date);
+            TransCreate_Valid(recId, userId, transType, amount);
 
             //Act
             var updatedTrans = new Trans()
@@ -127,7 +127,7 @@ namespace Rakaposhi.UnitTest
                 UserId = 2,
                 Transtype = 2,
                 Amount = 123,
-                Date = Convert.ToDateTime(date)
+                Date = DateTime.Now
             };
 
             var response = _controller.Update(updatedTrans) as NoContentResult;
@@ -137,14 +137,14 @@ namespace Rakaposhi.UnitTest
         }
 
         [DataTestMethod]
-        [DataRow(1, 1, 1, 2323, "22/08/2022", 2)]
-        [DataRow(1, 1, 1, 2323, "22/08/2022", 3)]
+        [DataRow(1, 1, 1, typeof(decimal), 2)]
+        [DataRow(1, 1, 1, typeof(decimal), 3)]
         [TestMethod]
 
-        public void RoleUpdate_Invalid(long recId, long userId, long transType, int amount, string date, long updatedId)
+        public void TransUpdate_Invalid(long recId, long userId, long transType, decimal amount, long updatedId)
         {
             //Arrange
-            TransCreate_Valid(recId, userId, transType, amount, date);
+            TransCreate_Valid(recId, userId, transType, amount);
 
             //Act
             var updatedTrans = new Trans()
@@ -153,7 +153,7 @@ namespace Rakaposhi.UnitTest
                 UserId = 2,
                 Transtype = 3,
                 Amount = 123,
-                Date = Convert.ToDateTime(date)
+                Date = DateTime.Now
             };
 
             var response = _controller.Update(updatedTrans) as BadRequestObjectResult;
@@ -164,14 +164,14 @@ namespace Rakaposhi.UnitTest
         }
 
         [DataTestMethod]
-        [DataRow(1, 1, 1, 2323, "22/08/2022")]
-        [DataRow(2, 1, 1, 2300, "22/08/2022")]
+        [DataRow(1, 1, 1, typeof(decimal))]
+        [DataRow(2, 1, 1, typeof(decimal))]
         [TestMethod]
 
-        public void TransDelete_Valid(long recId, long userId, long transType, int amount, string date)
+        public void TransDelete_Valid(long recId, long userId, long transType, decimal amount)
         {
             //Arrange
-            TransCreate_Valid(recId, userId, transType, amount, date);
+            TransCreate_Valid(recId, userId, transType, amount);
 
             //Act
             var response = _controller.Delete(recId) as NoContentResult;
@@ -181,14 +181,14 @@ namespace Rakaposhi.UnitTest
         }
 
         [DataTestMethod]
-        [DataRow(1, 1, 1, 2323, "22/08/2022")]
-        [DataRow(2, 1, 1, 2300, "22/08/2022")]
+        [DataRow(1, 1, 1, typeof(decimal))]
+        [DataRow(2, 1, 1, typeof(decimal))]
         [TestMethod]
 
-        public void TransDelete_Invalid(long recId, long userId, long transType, int amount, string date)
+        public void TransDelete_Invalid(long recId, long userId, long transType, decimal amount)
         {
             //Arrange
-            TransCreate_Valid(recId, userId, transType, amount, date);
+            TransCreate_Valid(recId, userId, transType, amount);
 
             //Act
             var response = _controller.Delete(3) as BadRequestObjectResult;
@@ -211,7 +211,7 @@ namespace Rakaposhi.UnitTest
                 Date = DateTime.Now
             };
 
-            TransCreate_Valid(trans.RecId.Value, trans.UserId, trans.Transtype, Convert.ToInt32(trans.Amount), trans.Date.ToString());
+            TransCreate_Valid(trans.RecId.Value, trans.UserId, trans.Transtype, trans.Amount);
 
             //Act
             var actionResult = _controller.Find(trans.RecId.Value);
@@ -252,7 +252,7 @@ namespace Rakaposhi.UnitTest
             //Arrange
             for (int i = 0; i < transactions.Count; i++)
             {
-                TransCreate_Valid(transactions[i].RecId.Value, transactions[i].UserId, transactions[i].Transtype, Convert.ToInt32(transactions[i].Amount), transactions[i].Date.ToString());
+                TransCreate_Valid(transactions[i].RecId.Value, transactions[i].UserId, transactions[i].Transtype, transactions[i].Amount);
             }
 
             //Act
