@@ -6,25 +6,25 @@ namespace Rakaposhi.API.Core.Controllers
 {
     [Route(Global.APICONTROLLER)]
     [ApiController]
-    public class UserStatusController : Controller
+    public class TransTypeController : Controller
     {
-        private UserStatusService _userStatusService;
+        private TransTypeService _transTypeService;
 
-        public UserStatusController(UserStatusService userStatusService)
+        public TransTypeController(TransTypeService transTypeService)
         {
-            _userStatusService = userStatusService;
+            _transTypeService = transTypeService;
         }
 
         [HttpPost]
-        public ActionResult Create([FromBody] UserStatus userStatus)
+        public ActionResult Create([FromBody] TransType transactionType)
         {
             try
             {
-                _userStatusService.Add(userStatus);
+                _transTypeService.Add(transactionType);
 
-                return Created("Get", userStatus);
+                return Created("Get", transactionType);
+
             }
-
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
@@ -32,11 +32,11 @@ namespace Rakaposhi.API.Core.Controllers
         }
 
         [HttpPut]
-        public ActionResult Update([FromBody] UserStatus userStatus)
+        public ActionResult Update([FromBody] TransType transactionType)
         {
             try
             {
-                _userStatusService.Update(userStatus);
+                _transTypeService.Update(transactionType);
 
                 return NoContent();
             }
@@ -51,20 +51,21 @@ namespace Rakaposhi.API.Core.Controllers
         {
             try
             {
-                _userStatusService.Delete(id);
+                _transTypeService.Delete(id);
 
                 return NoContent();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
         }
 
         [HttpGet("{id}")]
-        public ActionResult<UserStatus> Find(long id)
+        public ActionResult<TransType> Find(long id)
         {
-            var found = _userStatusService.Find(id);
+            var found = _transTypeService.Find(id);
+
             try
             {
                 if (found != null)
@@ -74,8 +75,7 @@ namespace Rakaposhi.API.Core.Controllers
 
                 return NotFound();
             }
-
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
@@ -86,9 +86,9 @@ namespace Rakaposhi.API.Core.Controllers
         {
             try
             {
-                var userStatusList = _userStatusService.GetAll();
+                var transactionTypeList = _transTypeService.GetAll();
 
-                return Ok(userStatusList);
+                return Ok(transactionTypeList);
             }
             catch (Exception ex)
             {

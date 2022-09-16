@@ -7,7 +7,9 @@ namespace Rakaposhi.Business.Core.FakeRepository
         private IUserRoleRepository _userRepository;
         private IUserStatusRepository _userStatusRepository;
         private ITransRepository _transRepository;
-
+        private IRoleRepository _roleRepository;
+        private ITransTypeRepository _transTypeRepository;
+        
         public IUserRoleRepository UserRoleRepository
         {
             get
@@ -34,6 +36,7 @@ namespace Rakaposhi.Business.Core.FakeRepository
             }
         }
 
+
         public ITransRepository TransRepository
         {
             get
@@ -44,6 +47,32 @@ namespace Rakaposhi.Business.Core.FakeRepository
                 }
 
                 return _transRepository;
+             }
+        }
+        
+        public IRoleRepository RoleRepository
+        {
+            get
+            {
+                if(_roleRepository is null)
+                {
+                    _roleRepository = new FakeRoleRepository();
+                }
+
+                return _roleRepository;
+            }
+        }
+        
+        public ITransTypeRepository TransTypeRepository
+        {
+            get
+            {
+                if(_transTypeRepository is null)
+                {
+                    _transTypeRepository = new FakeTransTypeRepository();
+                }
+
+                return _transTypeRepository;
             }
         }
     }
