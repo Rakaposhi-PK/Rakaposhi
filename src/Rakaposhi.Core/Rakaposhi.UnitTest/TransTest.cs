@@ -62,9 +62,9 @@ namespace Rakaposhi.UnitTest
         }
 
         [DataTestMethod]
-        [DataRow(1, 1, 1, 2323, "22-08-2022")]
-        [DataRow(2, 1, 1, 2323, "22-08-2022")]
-        [DataRow(3, 1, 1, 2323, "22-08-2022")]
+        [DataRow(1, 1, 1, 2323, "22/08/2022")]
+        [DataRow(2, 1, 1, 2323, "22/08/2022")]
+        [DataRow(3, 1, 1, 2323, "22/08/2022")]
 
         [TestMethod]
         public void TransCreate_Valid(long recId, long userId, long transType, int amount, string date)
@@ -99,7 +99,7 @@ namespace Rakaposhi.UnitTest
                 UserId = 1,
                 Transtype = 1,
                 Amount = Convert.ToDecimal(123),
-                Date = Convert.ToDateTime("22-08-2022")
+                Date = Convert.ToDateTime("22/08/2022")
             };
 
             //Act
@@ -111,8 +111,8 @@ namespace Rakaposhi.UnitTest
         }
 
         [DataTestMethod]
-        [DataRow(1, 1, 1, 2323, "22-08-2022")]
-        [DataRow(2, 1, 1, 2323, "22-08-2022")]
+        [DataRow(1, 1, 1, 2323, "22/08/2022")]
+        [DataRow(2, 1, 1, 2323, "22/08/2022")]
         [TestMethod]
 
         public void TransUpdate_Valid(long recId, long userId, long transType, int amount, string date)
@@ -137,8 +137,8 @@ namespace Rakaposhi.UnitTest
         }
 
         [DataTestMethod]
-        [DataRow(1, 1, 1, 2323, "22-08-2022", 2)]
-        [DataRow(1, 1, 1, 2323, "22-08-2022", 3)]
+        [DataRow(1, 1, 1, 2323, "22/08/2022", 2)]
+        [DataRow(1, 1, 1, 2323, "22/08/2022", 3)]
         [TestMethod]
 
         public void RoleUpdate_Invalid(long recId, long userId, long transType, int amount, string date, long updatedId)
@@ -164,8 +164,8 @@ namespace Rakaposhi.UnitTest
         }
 
         [DataTestMethod]
-        [DataRow(1, 1, 1, 2323, "22-08-2022")]
-        [DataRow(2, 1, 1, 2300, "22-08-2022")]
+        [DataRow(1, 1, 1, 2323, "22/08/2022")]
+        [DataRow(2, 1, 1, 2300, "22/08/2022")]
         [TestMethod]
 
         public void TransDelete_Valid(long recId, long userId, long transType, int amount, string date)
@@ -181,8 +181,8 @@ namespace Rakaposhi.UnitTest
         }
 
         [DataTestMethod]
-        [DataRow(1, 1, 1, 2323, "22-08-2022")]
-        [DataRow(2, 1, 1, 2300, "22-08-2022")]
+        [DataRow(1, 1, 1, 2323, "22/08/2022")]
+        [DataRow(2, 1, 1, 2300, "22/08/2022")]
         [TestMethod]
 
         public void TransDelete_Invalid(long recId, long userId, long transType, int amount, string date)
