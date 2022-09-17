@@ -29,7 +29,7 @@ namespace Rakaposhi.UnitTest
                                 RecId = 1,
                                 UserId = 1,
                                 Transtype = 1,
-                                Amount = 2300,
+                                Amount = 2300.9m,
                                 Date = DateTime.Now,
                             },
                             new Trans()
@@ -37,7 +37,7 @@ namespace Rakaposhi.UnitTest
                                 RecId = 2,
                                 UserId = 1,
                                 Transtype = 1,
-                                Amount = 2300,
+                                Amount = 2300.9m,
                                 Date = DateTime.Now,
                             },
                             new Trans()
@@ -45,7 +45,7 @@ namespace Rakaposhi.UnitTest
                                 RecId = 3,
                                 UserId = 1,
                                 Transtype = 1,
-                                Amount = 2300,
+                                Amount = 2300.9m,
                                 Date = DateTime.Now,
                             }
                         }
@@ -62,20 +62,22 @@ namespace Rakaposhi.UnitTest
         }
 
         [DataTestMethod]
-        [DataRow(1, 1, 1, typeof(decimal))]
-        [DataRow(2, 1, 1, typeof(decimal))]
-        [DataRow(3, 1, 1, typeof(decimal))]
+        [DataRow(1, 1, 1)]
+        [DataRow(2, 1, 1)]
+        [DataRow(3, 1, 1)]
 
         [TestMethod]
-        public void TransCreate_Valid(long recId, long userId, long transType, decimal amount)
+        public void TransCreate_Valid(long recId, long userId, long transType)
         {
             //Arrange
+            decimal amount = 123.8m;
+
             var trans = new Trans()
             {
                 RecId = recId,
                 UserId = userId,
                 Transtype = transType,
-                Amount = Convert.ToDecimal(amount),
+                Amount = amount,
                 Date = DateTime.Now
             };
 
@@ -86,7 +88,7 @@ namespace Rakaposhi.UnitTest
             //Assert
             Assert.AreEqual(HttpStatusCode.Created, (HttpStatusCode)response.StatusCode);
             Assert.IsNotNull(value: newTrans);
-            Assert.AreEqual(expected: newTrans.RecId, actual: newTrans.RecId);
+            Assert.AreEqual(trans.RecId, newTrans.RecId);
         }
 
         [TestMethod]
@@ -98,7 +100,7 @@ namespace Rakaposhi.UnitTest
                 RecId = null,
                 UserId = 1,
                 Transtype = 1,
-                Amount = Convert.ToDecimal(123),
+                Amount = 123.4m,
                 Date = DateTime.Now
             };
 
@@ -111,14 +113,14 @@ namespace Rakaposhi.UnitTest
         }
 
         [DataTestMethod]
-        [DataRow(1, 1, 1, typeof(decimal))]
-        [DataRow(2, 1, 1, typeof(decimal))]
+        [DataRow(1, 1, 1)]
+        [DataRow(2, 1, 1)]
         [TestMethod]
 
-        public void TransUpdate_Valid(long recId, long userId, long transType, decimal amount)
+        public void TransUpdate_Valid(long recId, long userId, long transType)
         {
             //Arrange
-            TransCreate_Valid(recId, userId, transType, amount);
+            TransCreate_Valid(recId, userId, transType);
 
             //Act
             var updatedTrans = new Trans()
@@ -126,7 +128,7 @@ namespace Rakaposhi.UnitTest
                 RecId = recId,
                 UserId = 2,
                 Transtype = 2,
-                Amount = 123,
+                Amount = 123.5m,
                 Date = DateTime.Now
             };
 
@@ -137,14 +139,14 @@ namespace Rakaposhi.UnitTest
         }
 
         [DataTestMethod]
-        [DataRow(1, 1, 1, typeof(decimal), 2)]
-        [DataRow(1, 1, 1, typeof(decimal), 3)]
+        [DataRow(1, 1, 1, 2)]
+        [DataRow(1, 1, 1, 3)]
         [TestMethod]
 
-        public void TransUpdate_Invalid(long recId, long userId, long transType, decimal amount, long updatedId)
+        public void TransUpdate_Invalid(long recId, long userId, long transType, long updatedId)
         {
             //Arrange
-            TransCreate_Valid(recId, userId, transType, amount);
+            TransCreate_Valid(recId, userId, transType);
 
             //Act
             var updatedTrans = new Trans()
@@ -152,26 +154,27 @@ namespace Rakaposhi.UnitTest
                 RecId = updatedId,
                 UserId = 2,
                 Transtype = 3,
-                Amount = 123,
+                Amount = 123.5m,
                 Date = DateTime.Now
             };
 
             var response = _controller.Update(updatedTrans) as BadRequestObjectResult;
 
             //Assert
+            Assert.IsNotNull(response);
             Assert.AreEqual(HttpStatusCode.BadRequest, (HttpStatusCode)response.StatusCode);
             Assert.AreEqual(ErrorCode.UPDATEERROR, response.Value.ToString());
         }
 
         [DataTestMethod]
-        [DataRow(1, 1, 1, typeof(decimal))]
-        [DataRow(2, 1, 1, typeof(decimal))]
+        [DataRow(1, 1, 1)]
+        [DataRow(2, 1, 1)]
         [TestMethod]
 
-        public void TransDelete_Valid(long recId, long userId, long transType, decimal amount)
+        public void TransDelete_Valid(long recId, long userId, long transType)
         {
             //Arrange
-            TransCreate_Valid(recId, userId, transType, amount);
+            TransCreate_Valid(recId, userId, transType);
 
             //Act
             var response = _controller.Delete(recId) as NoContentResult;
@@ -181,14 +184,14 @@ namespace Rakaposhi.UnitTest
         }
 
         [DataTestMethod]
-        [DataRow(1, 1, 1, typeof(decimal))]
-        [DataRow(2, 1, 1, typeof(decimal))]
+        [DataRow(1, 1, 1)]
+        [DataRow(2, 1, 1)]
         [TestMethod]
 
-        public void TransDelete_Invalid(long recId, long userId, long transType, decimal amount)
+        public void TransDelete_Invalid(long recId, long userId, long transType)
         {
             //Arrange
-            TransCreate_Valid(recId, userId, transType, amount);
+            TransCreate_Valid(recId, userId, transType);
 
             //Act
             var response = _controller.Delete(3) as BadRequestObjectResult;
@@ -198,47 +201,30 @@ namespace Rakaposhi.UnitTest
             Assert.AreEqual(ErrorCode.DELETEERROR, response.Value.ToString());
         }
 
+        [DataTestMethod]
+        [DataRow(1, 1, 1)]
+        [DataRow(2, 1, 1)]
         [TestMethod]
-        public void TransFind_Valid()
+        public void TransFind_Valid(long recId, long userId, long transType)
         {
-            //Arrange
-            var trans = new Trans()
-            {
-                RecId = 1,
-                UserId = 1,
-                Transtype = 1,
-                Amount = 123,
-                Date = DateTime.Now
-            };
-
-            TransCreate_Valid(trans.RecId.Value, trans.UserId, trans.Transtype, trans.Amount);
+            TransCreate_Valid(recId, userId, transType);
 
             //Act
-            var actionResult = _controller.Find(trans.RecId.Value);
+            var actionResult = _controller.Find(recId);
             var response = actionResult.Result as OkObjectResult;
             var getTrans = (Trans)response.Value;
 
             //Assert
             Assert.AreEqual(HttpStatusCode.OK, (HttpStatusCode)response.StatusCode);
-            Assert.AreEqual(trans.RecId, getTrans.RecId.Value);
-            Assert.AreEqual(trans.Amount, getTrans.Amount);
+            Assert.AreEqual(recId, getTrans.RecId.Value);
+            Assert.AreEqual(userId, getTrans.UserId);
         }
 
         [TestMethod]
         public void TransFind_InValid()
         {
-            //Arrange
-            var trans = new Trans()
-            {
-                RecId = 1,
-                UserId = 1,
-                Transtype = 1,
-                Amount = 123,
-                Date = DateTime.Now
-            };
-
             //Act
-            var actionResult = _controller.Find(trans.RecId.Value);
+            var actionResult = _controller.Find(1);
             var response = actionResult.Result as NotFoundResult;
 
             //Assert
@@ -252,7 +238,7 @@ namespace Rakaposhi.UnitTest
             //Arrange
             for (int i = 0; i < transactions.Count; i++)
             {
-                TransCreate_Valid(transactions[i].RecId.Value, transactions[i].UserId, transactions[i].Transtype, transactions[i].Amount);
+                TransCreate_Valid(transactions[i].RecId.Value, transactions[i].UserId, transactions[i].Transtype);
             }
 
             //Act

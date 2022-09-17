@@ -18,8 +18,8 @@ namespace Rakaposhi.Business.Core.Services
             {
                 throw new ServiceException(ErrorCode.ADDERROR);
             }
-            _factory.TransRepository.Add(trans);
 
+            _factory.TransRepository.Add(trans);
         }
 
         public void Update(Trans trans)
@@ -37,7 +37,7 @@ namespace Rakaposhi.Business.Core.Services
         public void Delete(long id)
         {
             var found = _factory.TransRepository.Find(id);
-            
+
             if(found == null)
             {
                 throw new ServiceException(ErrorCode.DELETEERROR);
