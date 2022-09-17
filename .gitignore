@@ -19,3 +19,5 @@ bin-release/
 /src/Rakaposhi.Core/.vs
 /.vs
 /src/Rakaposhi.Core/Rakaposhi.API.Core/Rakaposhi.API.Core.csproj.user
+/src/Rakaposhi.Core/Rakaposhi.API.Core/Properties
+/database/scripts/combine_sps.sql
