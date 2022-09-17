@@ -9,7 +9,8 @@ namespace Rakaposhi.Business.Core.DataObjects
 
         [Required]
         public long UserId { get; set; }
-        
+
+        [Required]
         public long RoleId { get; set; }
 
         public override long Key { get => this.RecId.Value; }
