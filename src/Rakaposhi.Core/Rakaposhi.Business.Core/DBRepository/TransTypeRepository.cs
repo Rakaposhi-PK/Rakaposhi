@@ -44,7 +44,8 @@ namespace Rakaposhi.Business.Core.DBRepository
             DbCommand cmd = _db.CreateStoreProcedure(storeProcedureName: StoreProcds.FIND);
             _db.AddParameter(cmd, paramName: Params.RECID, paramvalue: Id);
             string found = Convert.ToString(_db.ExecuteScalar(cmd));
-            TransType transactionType =  JsonSerializer.Deserialize<TransType>(found);
+            TransType transactionType = string.IsNullOrEmpty(found) ? null :
+                JsonSerializer.Deserialize<TransType>(found);
 
             return transactionType;
         }
@@ -53,7 +54,8 @@ namespace Rakaposhi.Business.Core.DBRepository
         {
             DbCommand cmd = _db.CreateStoreProcedure(storeProcedureName: StoreProcds.GETALL);
             string found = Convert.ToString(_db.ExecuteScalar(cmd));
-            var transactionTypes = JsonSerializer.Deserialize<List<TransType>>(found);
+            var transactionTypes = string.IsNullOrEmpty(found) ? null :
+                JsonSerializer.Deserialize<List<TransType>>(found);
 
             return transactionTypes;
         }
