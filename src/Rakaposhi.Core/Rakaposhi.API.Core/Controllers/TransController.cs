@@ -62,7 +62,7 @@ namespace Rakaposhi.API.Core.Controllers
         }
 
         [HttpGet("{id}")]
-        public ActionResult<UserStatus> Find(long id)
+        public ActionResult<Trans> Find(long id)
         {
             var found = _transService.Find(id);
 
@@ -87,9 +87,9 @@ namespace Rakaposhi.API.Core.Controllers
         {
             try
             {
-                var userStatusList = _transService.GetAll();
+                var transList = _transService.GetAll();
 
-                return Ok(userStatusList);
+                return Ok(transList);
             }
             catch (Exception ex)
             {
