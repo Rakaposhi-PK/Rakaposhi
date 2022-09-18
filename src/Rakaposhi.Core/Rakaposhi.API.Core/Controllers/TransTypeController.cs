@@ -4,26 +4,41 @@ using Rakaposhi.Business.Core.Services;
 
 namespace Rakaposhi.API.Core.Controllers
 {
+    /// <summary>
+    ///     TransType Controller
+    /// </summary>
     [Route(Global.APICONTROLLER)]
     [ApiController]
     public class TransTypeController : Controller
     {
+        /// <summary>
+        ///     TransType Service Variable
+        /// </summary>
         private TransTypeService _transTypeService;
 
+        /// <summary>
+        ///     Constructor
+        /// </summary>
+        /// <param name="transTypeService"></param>
         public TransTypeController(TransTypeService transTypeService)
         {
             _transTypeService = transTypeService;
         }
 
-        [HttpPost]
-        public ActionResult Create([FromBody] TransType transactionType)
+        /// <summary>
+        ///     Create Method
+        /// </summary>
+        /// <param name="transactionType"></param>
+        /// <returns></returns>
+        [HttpPost(Name = "TransTypeCreate")]
+        [ProducesResponseType(typeof(TransType), StatusCodes.Status201Created)]
+        public ActionResult<TransType> Create([FromBody] TransType transactionType)
         {
             try
             {
                 _transTypeService.Add(transactionType);
 
                 return Created("Get", transactionType);
-
             }
             catch (Exception ex)
             {
@@ -31,7 +46,13 @@ namespace Rakaposhi.API.Core.Controllers
             }
         }
 
-        [HttpPut]
+        /// <summary>
+        ///     Update Method
+        /// </summary>
+        /// <param name="transactionType"></param>
+        /// <returns></returns>
+        [HttpPut(Name = "TransTypeUpdate")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         public ActionResult Update([FromBody] TransType transactionType)
         {
             try
@@ -46,7 +67,13 @@ namespace Rakaposhi.API.Core.Controllers
             }
         }
 
-        [HttpDelete("{id}")]
+        /// <summary>
+        ///     Delete Method
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpDelete("{id}", Name = "TransTypeDelete")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         public ActionResult Delete(long id)
         {
             try
@@ -61,19 +88,19 @@ namespace Rakaposhi.API.Core.Controllers
             }
         }
 
-        [HttpGet("{id}")]
+        /// <summary>
+        ///     Find Method
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet("{id}", Name = "TransTypeFind")]
         public ActionResult<TransType> Find(long id)
         {
-            var found = _transTypeService.Find(id);
-
             try
             {
-                if (found != null)
-                {
-                    return Ok(found);
-                }
+                var found = _transTypeService.Find(id);
 
-                return NotFound();
+                return Ok(found);
             }
             catch (Exception ex)
             {
@@ -81,8 +108,12 @@ namespace Rakaposhi.API.Core.Controllers
             }
         }
 
-        [HttpGet]
-        public ActionResult GetAll()
+        /// <summary>
+        ///     GetAll Method
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet(Name = "TransTypeGetAll")]
+        public ActionResult<List<TransType>> GetAll()
         {
             try
             {
