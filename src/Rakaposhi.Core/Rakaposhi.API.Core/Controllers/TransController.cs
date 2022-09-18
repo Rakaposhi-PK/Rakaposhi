@@ -94,6 +94,7 @@ namespace Rakaposhi.API.Core.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet("{id}", Name = "TransFind")]
+        [HttpGet("{id}")]
         public ActionResult<Trans> Find(long id)
         {
             try
