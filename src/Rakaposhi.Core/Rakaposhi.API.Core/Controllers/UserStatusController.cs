@@ -4,19 +4,35 @@ using Rakaposhi.Business.Core.Services;
 
 namespace Rakaposhi.API.Core.Controllers
 {
+    /// <summary>
+    ///     UserStatus Controller
+    /// </summary>
     [Route(Global.APICONTROLLER)]
     [ApiController]
     public class UserStatusController : Controller
     {
+        /// <summary>
+        ///     UserStatus Service Variable
+        /// </summary>
         private UserStatusService _userStatusService;
 
+        /// <summary>
+        ///     Constructor
+        /// </summary>
+        /// <param name="userStatusService"></param>
         public UserStatusController(UserStatusService userStatusService)
         {
             _userStatusService = userStatusService;
         }
 
-        [HttpPost]
-        public ActionResult Create([FromBody] UserStatus userStatus)
+        /// <summary>
+        ///     Create Method
+        /// </summary>
+        /// <param name="userStatus"></param>
+        /// <returns></returns>
+        [HttpPost(Name = "UserStatusCreate")]
+        [ProducesResponseType(typeof(UserStatus), StatusCodes.Status201Created)]
+        public ActionResult<UserStatus> Create([FromBody] UserStatus userStatus)
         {
             try
             {
@@ -24,14 +40,19 @@ namespace Rakaposhi.API.Core.Controllers
 
                 return Created("Get", userStatus);
             }
-
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
         }
 
-        [HttpPut]
+        /// <summary>
+        ///     Update Method
+        /// </summary>
+        /// <param name="userStatus"></param>
+        /// <returns></returns>
+        [HttpPut(Name = "UserStatusUpdate")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         public ActionResult Update([FromBody] UserStatus userStatus)
         {
             try
@@ -46,7 +67,13 @@ namespace Rakaposhi.API.Core.Controllers
             }
         }
 
-        [HttpDelete("{id}")]
+        /// <summary>
+        ///     Delete Method
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpDelete("{id}", Name = "UserStatusDelete")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         public ActionResult Delete(long id)
         {
             try
@@ -55,34 +82,39 @@ namespace Rakaposhi.API.Core.Controllers
 
                 return NoContent();
             }
+
             catch(Exception ex)
             {
                 return BadRequest(ex.Message);
             }
         }
 
-        [HttpGet("{id}")]
+        /// <summary>
+        ///     Find Method
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet("{id}", Name = "UserStatusFind")]
         public ActionResult<UserStatus> Find(long id)
         {
-            var found = _userStatusService.Find(id);
             try
             {
-                if (found != null)
-                {
-                    return Ok(found);
-                }
+                var found = _userStatusService.Find(id);
 
-                return NotFound();
+                return Ok(found);
             }
-
             catch(Exception ex)
             {
                 return BadRequest(ex.Message);
             }
         }
 
-        [HttpGet]
-        public ActionResult GetAll()
+        /// <summary>
+        ///     GetAll Method
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet(Name = "UserStatusGetAll")]
+        public ActionResult<List<UserStatus>> GetAll()
         {
             try
             {

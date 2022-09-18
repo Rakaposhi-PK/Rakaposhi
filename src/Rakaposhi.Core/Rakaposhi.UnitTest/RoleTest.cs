@@ -240,7 +240,7 @@ namespace Rakaposhi.UnitTest
             }
 
             //Act
-            var response = _controller.GetAll().Result as OkObjectResult ;
+            var response = _controller.GetAll().Result as OkObjectResult;
             var allRoles = (IEnumerable<Role>)response.Value;
 
             //Assert
